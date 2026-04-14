@@ -1365,7 +1365,15 @@
 
   function admRefresh(){
     try{ localStorage.removeItem(CACHE_KEY); } catch(e){}
-    location.reload();
+    // Xóa cả cache phía GAS
+    const url = window._admApiOverride || API_URL;
+    if(url) {
+      const s = document.createElement('script');
+      s.src = url + '?action=all&nocache=1&callback=_admNoop';
+      window._admNoop = function(){ delete window._admNoop; };
+      document.body.appendChild(s);
+    }
+    setTimeout(() => location.reload(), 500);
   }
 
   function admClearCache(){
