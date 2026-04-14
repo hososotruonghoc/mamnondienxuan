@@ -66,6 +66,10 @@
   .slide-caption strong{font-family:'Fraunces',serif;font-size:.95rem;display:block}
   .slide-caption span{font-size:.72rem;color:#6b7a72}
   .slide-tag{background:var(--g2);color:white;font-size:.7rem;padding:4px 10px;border-radius:999px;font-weight:600}
+  .slide-tag[data-type="truong"]{background:#3fb28c}
+  .slide-tag[data-type="hoatdong"]{background:var(--accent);color:var(--g-deep)}
+  .slide-tag[data-type="banru"]{background:var(--coral)}
+  .slide-tag[data-type="lehoi"]{background:#c084fc}
   @media(max-width:1100px){.hero-carousel{display:none}}
 
   .wave-svg{position:absolute;bottom:-1px;left:0;width:100%;display:block}
@@ -210,9 +214,27 @@
   .teacher-profile.disabled{background:#d8e0dc;color:#8a9690;pointer-events:none}
 
   .guide{padding:100px 6vw;background:var(--cream)}
-  .guide-wrap{max-width:900px;margin:0 auto}
+  .guide-wrap{max-width:1100px;margin:0 auto}
   .guide-head{text-align:center;margin-bottom:40px}
   .guide-head h2{font-size:clamp(2rem,3.5vw,3rem);color:var(--g-deep);font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.02em}
+  .guide-head p{color:#5a6b64;max-width:560px;margin:6px auto 0}
+  .guide-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+  .guide-tab{padding:11px 22px;border-radius:999px;border:1px solid #d8e0dc;background:white;font-family:inherit;font-size:.85rem;cursor:pointer;color:#5a6b64;transition:all .2s;font-weight:500}
+  .guide-tab.active{background:var(--g-deep);color:white;border-color:var(--g-deep)}
+  .guide-panel{display:none}
+  .guide-panel.active{display:block;animation:fadeSlide .4s ease}
+  .step-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .step-card{background:white;border-radius:20px;overflow:hidden;border:1px solid #eef2ef;transition:all .3s}
+  .step-card:hover{box-shadow:0 20px 40px -20px rgba(30,107,84,.18);transform:translateY(-3px)}
+  .step-card.full{grid-column:1/-1}
+  .step-illust{background:linear-gradient(135deg,#eaf5ef,#d6ecdb);padding:24px;min-height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .step-illust svg{max-width:100%;height:auto}
+  .step-num{position:absolute;top:14px;left:14px;width:32px;height:32px;border-radius:50%;background:var(--g2);color:white;display:grid;place-items:center;font-family:'Fraunces',serif;font-size:.9rem;font-weight:700;box-shadow:0 4px 12px rgba(45,138,110,.3)}
+  .step-body{padding:22px}
+  .step-body h4{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--g-deep);margin-bottom:8px}
+  .step-body p{font-size:.86rem;color:#5a6b64;line-height:1.65}
+  .step-body code{background:#eaf5ef;padding:2px 8px;border-radius:6px;font-size:.8rem;color:var(--g3)}
+  .step-tip{margin-top:12px;padding:10px 14px;background:#fffbe6;border-radius:10px;font-size:.8rem;color:#8a6d00;border:1px solid #ffe99a}
   .faq-item{background:white;border-radius:16px;margin-bottom:12px;overflow:hidden;border:1px solid #eef2ef}
   .faq-item.open{box-shadow:0 15px 35px -15px rgba(30,107,84,.2)}
   .faq-q{padding:20px 26px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;font-weight:500;color:var(--ink)}
@@ -221,8 +243,9 @@
   .faq-toggle{width:32px;height:32px;border-radius:50%;background:#eaf5ef;color:var(--g3);display:grid;place-items:center;flex-shrink:0;transition:all .3s;font-size:1rem}
   .faq-item.open .faq-toggle{background:var(--g2);color:white;transform:rotate(45deg)}
   .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;color:#5a6b64;font-size:.9rem;line-height:1.7}
-  .faq-item.open .faq-a{max-height:400px}
+  .faq-item.open .faq-a{max-height:500px}
   .faq-a-inner{padding:0 26px 22px 62px}
+  @media(max-width:700px){.step-grid{grid-template-columns:1fr}.step-illust{min-height:140px;padding:18px}.step-body{padding:18px}.step-body h4{font-size:.95rem}}
 
   .locate{padding:80px 6vw;background:white}
   .locate-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:center;max-width:1200px;margin:0 auto}
@@ -285,6 +308,15 @@
     .locate-wrap{grid-template-columns:1fr;gap:40px}
     .foot-grid{grid-template-columns:1fr 1fr;gap:30px}
     .foot-bottom{flex-direction:column;text-align:center}
+    .guide-tabs{gap:6px;margin-bottom:28px}
+    .guide-tab{padding:9px 16px;font-size:.8rem}
+    .faq-q{padding:16px 18px;gap:14px}
+    .faq-q-text{font-size:.88rem}
+    .faq-a-inner{padding:0 18px 18px 44px}
+    .step-card:hover{transform:none;box-shadow:none}
+    .admin-body{padding:20px}
+    .admin-header{padding:18px 20px}
+    .admin-header h3{font-size:1.05rem}
   }
   @media(max-width:480px){
     .class-grid,.teacher-grid{grid-template-columns:1fr}
@@ -292,7 +324,62 @@
     .stat-num{font-size:1.5rem}
     .hero h1{font-size:2rem}
     .foot-grid{grid-template-columns:1fr}
+    .step-illust{min-height:120px;padding:14px}
+    .step-body{padding:14px}
+    .step-body p{font-size:.82rem}
+    .step-tip{font-size:.76rem;padding:8px 12px}
+    .faq-q{padding:14px 16px}
+    .faq-a-inner{padding:0 16px 16px 36px}
+    .guide-head h2{font-size:1.5rem}
+    .admin-tabs{flex-wrap:wrap}
+    .admin-tab{font-size:.76rem;padding:10px 8px}
+    .adm-link-card{padding:12px;gap:10px}
+    .adm-link-icon{width:36px;height:36px;font-size:1rem}
   }
+  /* ===== ADMIN PANEL ===== */
+  .admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;backdrop-filter:blur(4px)}
+  .admin-overlay.open{display:flex;align-items:center;justify-content:center}
+  .admin-box{background:white;border-radius:24px;width:94%;max-width:640px;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+  .admin-header{background:linear-gradient(135deg,var(--g2),var(--g-deep));color:white;padding:22px 28px;display:flex;justify-content:space-between;align-items:center}
+  .admin-header h3{font-family:'Fraunces',serif;font-size:1.2rem;display:flex;align-items:center;gap:10px}
+  .admin-close{background:rgba(255,255,255,.15);border:none;border-radius:50%;width:36px;height:36px;color:white;font-size:1.1rem;cursor:pointer}
+  .admin-close:hover{background:rgba(255,255,255,.3)}
+  .admin-tabs{display:flex;border-bottom:1px solid #eef2ef;background:#fafbf8}
+  .admin-tab{flex:1;padding:14px;text-align:center;font-size:.82rem;font-weight:600;color:#6b7a72;cursor:pointer;border:none;background:none;font-family:inherit;border-bottom:3px solid transparent;transition:all .2s}
+  .admin-tab.active{color:var(--g-deep);border-bottom-color:var(--g2);background:white}
+  .admin-body{flex:1;overflow-y:auto;padding:28px}
+  .admin-section{display:none}
+  .admin-section.active{display:block}
+  .adm-field{margin-bottom:18px}
+  .adm-field label{display:block;font-size:.76rem;font-weight:600;color:#6b7a72;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+  .adm-field input,.adm-field textarea{width:100%;padding:12px 16px;border-radius:12px;border:1px solid #d8e0dc;font-family:inherit;font-size:.9rem;outline:none;transition:border .2s}
+  .adm-field input:focus,.adm-field textarea:focus{border-color:var(--g2)}
+  .adm-field textarea{resize:vertical;min-height:60px}
+  .adm-field small{display:block;margin-top:4px;font-size:.72rem;color:#8a9690}
+  .adm-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .adm-btn{padding:12px 24px;border-radius:999px;border:none;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+  .adm-btn-primary{background:var(--g2);color:white}
+  .adm-btn-primary:hover{background:var(--g-deep)}
+  .adm-btn-outline{background:white;color:var(--g-deep);border:1.5px solid var(--g2)}
+  .adm-btn-outline:hover{background:#eaf5ef}
+  .adm-btn-danger{background:#fee;color:#c04a2a;border:1.5px solid #fcc}
+  .adm-btn-danger:hover{background:#fdd}
+  .adm-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+  .adm-divider{border:none;border-top:1px dashed #e0e6e2;margin:24px 0}
+  .adm-link-card{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid #eef2ef;border-radius:14px;margin-bottom:10px;transition:all .2s;text-decoration:none;color:var(--ink)}
+  .adm-link-card:hover{border-color:var(--g1);background:#f7fbf8;transform:translateX(4px)}
+  .adm-link-icon{width:42px;height:42px;border-radius:12px;background:#eaf5ef;display:grid;place-items:center;font-size:1.2rem;flex-shrink:0}
+  .adm-link-card strong{font-size:.9rem;display:block;margin-bottom:2px}
+  .adm-link-card span{font-size:.72rem;color:#6b7a72}
+  .adm-link-go{margin-left:auto;color:var(--g2);font-size:1.1rem;flex-shrink:0}
+  .adm-alert{padding:12px 16px;border-radius:12px;font-size:.85rem;margin-bottom:16px;display:none}
+  .adm-alert.ok{display:block;background:#eaf5ef;color:#1e6b54}
+  .adm-alert.err{display:block;background:#fee;color:#c04a2a}
+  .adm-login{text-align:center;padding:40px 20px}
+  .adm-login h4{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--g-deep);margin-bottom:8px}
+  .adm-login p{color:#6b7a72;font-size:.88rem;margin-bottom:24px}
+  .adm-login input{max-width:280px;margin:0 auto;text-align:center}
+  @media(max-width:600px){.adm-row{grid-template-columns:1fr}.admin-box{border-radius:16px}}
 </style>
 </head>
 <body>
@@ -313,7 +400,7 @@
     <li><a href="#teachers">Năng lực GV</a></li>
     <li><a href="#guide">Hướng dẫn</a></li>
   </ul>
-  <button class="nav-cta">Đăng nhập phụ huynh</button>
+  <button class="nav-cta" onclick="openAdmin()">⚙ Admin</button>
   <button class="hamburger" onclick="toggleMenu()">☰</button>
 </nav>
 <div class="mobile-backdrop" id="backdrop" onclick="toggleMenu()"></div>
@@ -325,20 +412,17 @@
   <a href="#teachers" onclick="toggleMenu()">Năng lực GV</a>
   <a href="#guide" onclick="toggleMenu()">Hướng dẫn</a>
   <a href="#contact" onclick="toggleMenu()">Liên hệ</a>
+  <button class="nav-cta" style="width:100%;margin-top:18px;font-size:.95rem;padding:14px" onclick="toggleMenu();openAdmin()">⚙ Admin</button>
 </aside>
 
 <section class="hero" id="home">
   <div class="hero-carousel" id="carousel">
-    <div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&q=80')"><div class="slide-caption"><div><strong>Giờ học vẽ sáng tạo</strong><span>Lớp Lá</span></div><span class="slide-tag">Mới</span></div></div>
-    <div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80')"><div class="slide-caption"><div><strong>Khám phá thiên nhiên</strong><span>Lớp Chồi</span></div><span class="slide-tag">Hot</span></div></div>
-    <div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('https://images.unsplash.com/photo-1544776193-52d4c1cd4ad9?w=600&q=80')"><div class="slide-caption"><div><strong>Hoạt động ngoài trời</strong><span>Toàn trường</span></div><span class="slide-tag">Vui</span></div></div>
-    <div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('https://images.unsplash.com/photo-1587653263995-422546a7a569?w=600&q=80')"><div class="slide-caption"><div><strong>Giờ kể chuyện</strong><span>Lớp Mầm</span></div><span class="slide-tag">Ấm áp</span></div></div>
-    <div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('https://images.unsplash.com/photo-1564429097439-e4ffc5b1cdb1?w=600&q=80')"><div class="slide-caption"><div><strong>Bữa ăn dinh dưỡng</strong><span>Bếp ăn</span></div><span class="slide-tag">Sức khỏe</span></div></div>
+    <!-- Slides sẽ được JS tạo từ dữ liệu Sheet "Hinh Anh" -->
   </div>
   <div class="hero-content">
     <div class="eyebrow"><span class="dot"></span>Hồ sơ số giáo dục <span id="schoolYear">2025 – 2026</span></div>
-    <h1 class="display">Nơi ươm mầm <em>yêu thương</em><br>và chắp cánh ước mơ</h1>
-    <p>Trường Mầm non Diễn Xuân – xã Quảng Châu, tỉnh Nghệ An. Dữ liệu đồng bộ trực tiếp từ Google Sheet, cập nhật theo thời gian thực.</p>
+    <h1 class="display">Nơi ươm mầm<br><em>yêu thương</em><br>và chắp cánh ước mơ</h1>
+    <p>📍 Trường Mầm non Diễn Xuân – xã Quảng Châu, tỉnh Nghệ An</p>
     <div class="hero-actions">
       <a href="#records" class="btn btn-primary">Khám phá hồ sơ số →</a>
       <a href="#teachers" class="btn btn-ghost">Xem đội ngũ GV</a>
@@ -406,9 +490,98 @@
   <div class="guide-wrap">
     <div class="guide-head">
       <span class="kicker">Hướng dẫn sử dụng</span>
-      <h2>Câu hỏi thường gặp</h2>
+      <h2>Hướng dẫn sử dụng trang Hồ sơ số</h2>
     </div>
-    <div id="faqList"></div>
+    <div class="guide-tabs" id="guideTabs">
+      <button class="guide-tab active" onclick="guideTab('use')">📖 Cách sử dụng</button>
+      <button class="guide-tab" onclick="guideTab('faq')">❓ Hỏi đáp</button>
+    </div>
+
+    <!-- Panel 1: Cách sử dụng -->
+    <div class="guide-panel active" id="guideUse">
+      <div class="step-grid">
+
+        <!-- Bước 1: Chọn mục -->
+        <div class="step-card full">
+          <div class="step-illust">
+            <span class="step-num">1</span>
+            <svg viewBox="0 0 560 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="540" height="40" rx="10" fill="#1e6b54"/><circle cx="30" cy="30" r="12" fill="#fdfbf4"/><text x="30" y="34" font-size="10" text-anchor="middle">🌱</text><text x="140" y="34" font-size="9" fill="rgba(255,255,255,.85)" text-anchor="middle" font-family="sans-serif">Trang chủ</text><rect x="170" y="24" width="1" height="12" fill="rgba(255,255,255,.2)"/><text x="210" y="34" font-size="9" fill="#ffd66b" text-anchor="middle" font-family="sans-serif" font-weight="bold">Hồ sơ số</text><rect x="245" y="24" width="1" height="12" fill="rgba(255,255,255,.2)"/><text x="290" y="34" font-size="9" fill="rgba(255,255,255,.85)" text-anchor="middle" font-family="sans-serif">Quản lý trẻ</text><rect x="330" y="24" width="1" height="12" fill="rgba(255,255,255,.2)"/><text x="380" y="34" font-size="9" fill="rgba(255,255,255,.85)" text-anchor="middle" font-family="sans-serif">Năng lực GV</text><rect x="420" y="24" width="1" height="12" fill="rgba(255,255,255,.2)"/><text x="468" y="34" font-size="9" fill="rgba(255,255,255,.85)" text-anchor="middle" font-family="sans-serif">Hướng dẫn</text><text x="280" y="80" font-size="11" fill="#2d8a6e" text-anchor="middle" font-family="sans-serif" font-weight="bold">👆 Nhấn vào tên mục trên thanh menu để chuyển đến phần tương ứng</text><text x="280" y="100" font-size="9" fill="#6b7a72" text-anchor="middle" font-family="sans-serif">Trên điện thoại: nhấn nút ☰ góc phải → chọn mục</text></svg>
+          </div>
+          <div class="step-body">
+            <h4>Chọn mục cần xem trên thanh menu</h4>
+            <p>Nhấn vào tên mục trên thanh menu phía trên: <b>Hồ sơ số</b>, <b>Quản lý trẻ</b>, <b>Năng lực GV</b>, <b>Hướng dẫn</b>. Trang sẽ tự cuộn đến phần tương ứng. Trên điện thoại, nhấn nút <b>☰</b> ở góc phải để mở menu.</p>
+          </div>
+        </div>
+
+        <!-- Bước 2: Hồ sơ số -->
+        <div class="step-card">
+          <div class="step-illust">
+            <span class="step-num">2</span>
+            <svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg"><text x="160" y="18" font-size="9" fill="#2d8a6e" text-anchor="middle" font-family="sans-serif" font-weight="bold">MỤC "HỒ SƠ SỐ"</text><rect x="20" y="28" width="130" height="50" rx="10" fill="#fff" stroke="#d8e0dc"/><text x="85" y="48" font-size="14" text-anchor="middle">🏫</text><rect x="45" y="58" width="80" height="5" rx="2" fill="#eef2ef"/><text x="85" y="72" font-size="6" fill="#6b7a72" text-anchor="middle" font-family="sans-serif">Tổ chức & quản lý</text><rect x="170" y="28" width="130" height="50" rx="10" fill="#fff" stroke="#3fb28c" stroke-width="2"/><text x="235" y="48" font-size="14" text-anchor="middle">👩‍🏫</text><rect x="195" y="58" width="80" height="5" rx="2" fill="#eef2ef"/><text x="235" y="72" font-size="6" fill="#6b7a72" text-anchor="middle" font-family="sans-serif">CB, GV, NV</text><text x="235" y="93" font-size="18" fill="#3fb28c" text-anchor="middle">👆</text><text x="160" y="115" font-size="9" fill="#2d8a6e" text-anchor="middle" font-family="sans-serif" font-weight="bold">Nhấn vào thẻ → Danh sách hồ sơ hiện ra</text><rect x="40" y="125" width="240" height="18" rx="9" fill="#fff" stroke="#d8e0dc"/><text x="58" y="137" font-size="7" fill="#8a9690" font-family="sans-serif">🔍 Gõ tên hoặc mã để tìm nhanh...</text></svg>
+          </div>
+          <div class="step-body">
+            <h4>Xem danh mục Hồ sơ số</h4>
+            <p>Cuộn đến mục <b>"Hồ sơ số"</b> → Nhấn vào thẻ nhóm (VD: "Tổ chức & quản lý") → Danh sách hồ sơ con hiện ra. Dùng <b>ô tìm kiếm</b> phía trên để lọc nhanh theo tên hoặc mã (VD: "thi đua", "1.2.1").</p>
+          </div>
+        </div>
+
+        <!-- Bước 3: Mở và tải hồ sơ lên Drive -->
+        <div class="step-card">
+          <div class="step-illust" style="background:linear-gradient(135deg,#e8f0ff,#dae7ff)">
+            <span class="step-num">3</span>
+            <svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg"><text x="160" y="16" font-size="9" fill="#3858a8" text-anchor="middle" font-family="sans-serif" font-weight="bold">TẢI HỒ SƠ LÊN GOOGLE DRIVE</text><rect x="30" y="26" width="260" height="28" rx="6" fill="#fff" stroke="#d8e0dc"/><circle cx="46" cy="40" r="5" fill="#3fb28c"/><text x="58" y="43" font-size="7" fill="#6b7a72" font-family="sans-serif">1.2.1.1</text><text x="100" y="43" font-size="8" fill="#3a4a42" font-family="sans-serif">QĐ thành lập HĐ TĐ-KT</text><rect x="240" y="32" width="40" height="16" rx="8" fill="#3fb28c"/><text x="260" y="43" font-size="7" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="bold">Mở</text><text x="160" y="70" font-size="14" text-anchor="middle">⬇️</text><rect x="50" y="80" width="220" height="60" rx="10" fill="#fff" stroke="#4285f4"/><rect x="50" y="80" width="220" height="22" rx="10" fill="#4285f4"/><text x="160" y="95" font-size="9" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="bold">📁 Google Drive</text><rect x="70" y="110" width="80" height="20" rx="6" fill="#f0f4ff" stroke="#4285f4"/><text x="110" y="124" font-size="7" fill="#4285f4" text-anchor="middle" font-family="sans-serif" font-weight="bold">+ Tải tệp lên</text><rect x="165" y="110" width="90" height="20" rx="6" fill="#f0f4ff" stroke="#4285f4"/><text x="210" y="124" font-size="7" fill="#4285f4" text-anchor="middle" font-family="sans-serif">📁 Tải thư mục</text></svg>
+          </div>
+          <div class="step-body">
+            <h4>Mở hồ sơ & tải tệp lên Drive</h4>
+            <p>Nhấn nút <b>"Mở"</b> bên cạnh hồ sơ → Google Drive mở ra → Nhấn nút <b>"+ Tải tệp lên"</b> hoặc kéo thả tệp vào → Tệp tự động lưu trên Drive. Hồ sơ đã có trên hệ thống!</p>
+            <div class="step-tip">💡 Nút "Mở" chỉ hiện khi hồ sơ đã có link. Chấm xanh <b style="color:#3fb28c">●</b> = có link, chấm xám <b style="color:#cbd3cf">●</b> = chưa có.</div>
+          </div>
+        </div>
+
+        <!-- Bước 4: Quản lý trẻ -->
+        <div class="step-card">
+          <div class="step-illust" style="background:linear-gradient(135deg,#1e6b54,#165844)">
+            <span class="step-num" style="background:var(--accent);color:var(--g-deep)">4</span>
+            <svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg"><text x="160" y="16" font-size="9" fill="rgba(255,255,255,.9)" text-anchor="middle" font-family="sans-serif" font-weight="bold">MỤC "QUẢN LÝ TRẺ"</text><rect x="40" y="26" width="55" height="22" rx="11" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.25)"/><text x="67" y="40" font-size="7" fill="rgba(255,255,255,.7)" text-anchor="middle" font-family="sans-serif">Tất cả</text><rect x="104" y="26" width="55" height="22" rx="11" fill="#ffd66b"/><text x="131" y="40" font-size="7" fill="#1e6b54" text-anchor="middle" font-family="sans-serif" font-weight="bold">3 tuổi</text><rect x="168" y="26" width="55" height="22" rx="11" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.25)"/><text x="195" y="40" font-size="7" fill="rgba(255,255,255,.7)" text-anchor="middle" font-family="sans-serif">4 tuổi</text><rect x="232" y="26" width="55" height="22" rx="11" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.25)"/><text x="259" y="40" font-size="7" fill="rgba(255,255,255,.7)" text-anchor="middle" font-family="sans-serif">5 tuổi</text><rect x="40" y="56" width="110" height="80" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.15)"/><rect x="48" y="60" width="94" height="3" rx="1" fill="#ffd66b"/><text x="95" y="80" font-size="8" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="bold">MG 3 tuổi A</text><text x="70" y="96" font-size="14" fill="#ffd66b" font-family="serif" font-weight="bold">25</text><text x="100" y="96" font-size="14" fill="#8ec5ff" font-family="serif" font-weight="bold">12</text><text x="70" y="108" font-size="6" fill="rgba(255,255,255,.5)" font-family="sans-serif">Tổng</text><text x="100" y="108" font-size="6" fill="rgba(255,255,255,.5)" font-family="sans-serif">Nam</text><text x="95" y="128" font-size="7" fill="#ffd66b" font-family="sans-serif">Xem danh sách →</text><text x="160" y="56" font-size="18">👆</text><rect x="170" y="56" width="110" height="80" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.15)"/><rect x="178" y="60" width="94" height="3" rx="1" fill="#ffd66b"/><text x="225" y="80" font-size="8" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="bold">MG 3 tuổi B</text><text x="200" y="96" font-size="14" fill="#ffd66b" font-family="serif" font-weight="bold">28</text><text x="230" y="96" font-size="14" fill="#8ec5ff" font-family="serif" font-weight="bold">15</text></svg>
+          </div>
+          <div class="step-body">
+            <h4>Xem danh sách trẻ theo lớp</h4>
+            <p>Cuộn đến mục <b>"Quản lý trẻ"</b> → Chọn tab độ tuổi (Nhà trẻ / 3 tuổi / 4 tuổi / 5 tuổi) → Nhấn vào thẻ lớp → Bảng danh sách trẻ hiện ra gồm: họ tên, ngày sinh, giới tính, nơi sinh, SĐT phụ huynh. Nhấn vào từng bé để xem thêm thông tin cha mẹ, địa chỉ.</p>
+          </div>
+        </div>
+
+        <!-- Bước 5: Năng lực GV -->
+        <div class="step-card">
+          <div class="step-illust" style="background:linear-gradient(135deg,#f0f4ff,#dae7ff)">
+            <span class="step-num">5</span>
+            <svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg"><text x="160" y="16" font-size="9" fill="#3858a8" text-anchor="middle" font-family="sans-serif" font-weight="bold">MỤC "NĂNG LỰC GV"</text><rect x="30" y="26" width="120" height="110" rx="12" fill="#fff" stroke="#d8e0dc"/><rect x="30" y="26" width="120" height="35" rx="12" fill="linear-gradient(135deg,#8dd3a8,#3fb28c)"/><circle cx="90" cy="64" r="16" fill="#fff" stroke="#d8e0dc"/><text x="90" y="69" font-size="9" text-anchor="middle" fill="#2d8a6e" font-family="serif" font-weight="bold">NH</text><text x="90" y="88" font-size="8" text-anchor="middle" fill="#142a23" font-family="sans-serif" font-weight="bold">Nguyễn Thị Hội</text><text x="90" y="100" font-size="6" text-anchor="middle" fill="#6b7a72" font-family="sans-serif">Hiệu trưởng</text><rect x="56" y="108" width="68" height="18" rx="9" fill="#3fb28c"/><text x="90" y="120" font-size="7" fill="#fff" text-anchor="middle" font-family="sans-serif">📂 Hồ sơ cá nhân</text><text x="180" y="50" font-size="28">👆</text><text x="160" y="85" font-size="8" fill="#3858a8" font-family="sans-serif">Nhấn "Hồ sơ cá nhân"</text><text x="160" y="100" font-size="14">⬇️</text><rect x="160" y="108" width="140" height="30" rx="8" fill="#fff" stroke="#4285f4"/><rect x="160" y="108" width="140" height="14" rx="8" fill="#4285f4"/><text x="230" y="118" font-size="7" fill="#fff" text-anchor="middle" font-family="sans-serif">📁 Drive → Tải tệp lên</text><text x="230" y="133" font-size="7" fill="#4285f4" text-anchor="middle" font-family="sans-serif" font-weight="bold">+ Tải hồ sơ GV lên đây</text></svg>
+          </div>
+          <div class="step-body">
+            <h4>Xem & đưa Hồ sơ năng lực GV</h4>
+            <p>Cuộn đến mục <b>"Năng lực GV"</b> → Lọc theo nhóm (Ban giám hiệu / Giáo viên / Nhân viên) → Nhấn <b>"📂 Hồ sơ cá nhân"</b> → Google Drive mở ra → Nhấn <b>"+ Tải tệp lên"</b> để đưa hồ sơ giáo viên lên. Cách làm giống hệt mục Hồ sơ số.</p>
+          </div>
+        </div>
+
+        <!-- Bước 6: Điện thoại -->
+        <div class="step-card">
+          <div class="step-illust" style="background:linear-gradient(135deg,#fff8e1,#fff0c8)">
+            <span class="step-num">6</span>
+            <svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg"><rect x="120" y="5" width="80" height="140" rx="14" fill="#fff" stroke="#d8e0dc" stroke-width="2"/><rect x="120" y="5" width="80" height="24" rx="14" fill="#2d8a6e"/><text x="138" y="20" font-size="8" fill="#fff" font-family="sans-serif">🌱</text><rect x="180" y="14" width="12" height="8" rx="2" fill="rgba(255,255,255,.3)"/><text x="186" y="21" font-size="7" fill="#fff" text-anchor="middle">☰</text><rect x="128" y="36" width="64" height="6" rx="3" fill="#eef2ef"/><rect x="128" y="48" width="28" height="22" rx="5" fill="#d6ecdb"/><text x="142" y="62" font-size="9" text-anchor="middle">🏫</text><rect x="162" y="48" width="28" height="22" rx="5" fill="#fff0d1"/><text x="176" y="62" font-size="9" text-anchor="middle">👩‍🏫</text><rect x="128" y="76" width="64" height="6" rx="3" fill="#eef2ef"/><rect x="128" y="88" width="64" height="18" rx="4" fill="#fff" stroke="#d8e0dc"/><rect x="132" y="92" width="4" height="4" rx="2" fill="#3fb28c"/><rect x="140" y="93" width="30" height="3" rx="1" fill="#eef2ef"/><rect x="128" y="110" width="64" height="18" rx="4" fill="#fff" stroke="#d8e0dc"/><rect x="132" y="114" width="4" height="4" rx="2" fill="#cbd3cf"/><rect x="140" y="115" width="25" height="3" rx="1" fill="#eef2ef"/><text x="260" y="55" font-size="9" fill="#8a6d00" font-family="sans-serif" font-weight="bold">📱 Trên</text><text x="260" y="70" font-size="9" fill="#8a6d00" font-family="sans-serif" font-weight="bold">điện thoại</text><text x="260" y="95" font-size="8" fill="#6b7a72" font-family="sans-serif">Giao diện tự</text><text x="260" y="108" font-size="8" fill="#6b7a72" font-family="sans-serif">điều chỉnh</text><text x="260" y="121" font-size="8" fill="#6b7a72" font-family="sans-serif">cho màn nhỏ</text></svg>
+          </div>
+          <div class="step-body">
+            <h4>Xem trên điện thoại</h4>
+            <p>Mở link trang web trên điện thoại → Giao diện tự điều chỉnh cho màn hình nhỏ. Nhấn <b>☰</b> góc phải để mở menu. Mọi thao tác (xem hồ sơ, mở Drive, tải tệp) đều hoạt động bình thường trên điện thoại.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Panel 2: Hỏi đáp -->
+    <div class="guide-panel" id="guideFaq">
+      <div id="faqList"></div>
+    </div>
+
   </div>
 </section>
 
@@ -420,12 +593,121 @@
       <p style="color:#5a6b64;margin-bottom:24px">Quý phụ huynh có thể liên hệ bất kỳ ngày nào trong tuần.</p>
       <div class="info-row"><div class="ico">📍</div><div><strong>Địa chỉ</strong><span id="cfgAddress">Xã Quảng Châu, tỉnh Nghệ An</span></div></div>
       <div class="info-row"><div class="ico">☎</div><div><strong>Điện thoại</strong><span id="cfgPhone">(0238) 123 4567</span></div></div>
-      <div class="info-row"><div class="ico">✉</div><div><strong>Email</strong><span id="cfgEmail">mndienxuan@nghean.edu.vn</span></div></div>
+      <div class="info-row"><div class="ico">✉</div><div><strong>Email</strong><span id="cfgEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7b16151f121e15030e1a153b151c131e1a15551e1f0e550d15">[email&#160;protected]</a></span></div></div>
       <div class="info-row"><div class="ico">🕐</div><div><strong>Giờ đón trẻ</strong>6:45 – 17:15 (T2 – T6)</div></div>
     </div>
     <div class="map-frame"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=105.6%2C19.0%2C105.8%2C19.2&layer=mapnik" loading="lazy"></iframe></div>
   </div>
 </section>
+
+<!-- ===== ADMIN PANEL ===== -->
+<div class="admin-overlay" id="adminOverlay" onclick="if(event.target===this)closeAdmin()">
+  <div class="admin-box">
+    <div class="admin-header">
+      <h3>⚙ Quản trị hệ thống</h3>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+
+    <!-- Login gate -->
+    <div id="admLogin" class="admin-body">
+      <div class="adm-login">
+        <div style="font-size:2.5rem;margin-bottom:16px">🔐</div>
+        <h4>Đăng nhập quản trị</h4>
+        <p>Nhập mật khẩu để truy cập bảng điều khiển</p>
+        <div class="adm-field"><input type="password" id="admPwdInput" placeholder="Mật khẩu..." onkeydown="if(event.key==='Enter')admDoLogin()"></div>
+        <div id="admLoginMsg" class="adm-alert"></div>
+        <button class="adm-btn adm-btn-primary" onclick="admDoLogin()">🔓 Đăng nhập</button>
+      </div>
+    </div>
+
+    <!-- Main panel (hidden until login) -->
+    <div id="admMain" style="display:none;flex:1;overflow:hidden;flex-direction:column">
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="info" onclick="admTab('info')">🏫 Thông tin</button>
+        <button class="admin-tab" data-tab="data" onclick="admTab('data')">📋 Dữ liệu</button>
+        <button class="admin-tab" data-tab="pwd" onclick="admTab('pwd')">🔑 Mật khẩu</button>
+      </div>
+      <div class="admin-body">
+
+        <!-- Tab 1: Thông tin trường -->
+        <div class="admin-section active" id="admSecInfo">
+          <div id="admInfoMsg" class="adm-alert"></div>
+          <p style="font-size:.82rem;color:#6b7a72;margin-bottom:18px">💡 Thông tin trường được lưu trong sheet <b>"CauHinh"</b> trên Google Sheet. Sửa trực tiếp trong Sheet → nhấn <b>Làm mới</b> ở tab Dữ liệu. Hoặc sửa tạm ở đây (chỉ lưu trên trình duyệt này).</p>
+          <div class="adm-field">
+            <label>Tên trường</label>
+            <input type="text" id="admName" placeholder="VD: Trường Mầm non Diễn Xuân">
+          </div>
+          <div class="adm-row">
+            <div class="adm-field">
+              <label>Địa chỉ</label>
+              <input type="text" id="admAddr" placeholder="VD: Xã Quảng Châu, tỉnh Nghệ An">
+            </div>
+            <div class="adm-field">
+              <label>Năm học</label>
+              <input type="text" id="admYear" placeholder="VD: 2025 - 2026">
+            </div>
+          </div>
+          <div class="adm-row">
+            <div class="adm-field">
+              <label>Điện thoại</label>
+              <input type="text" id="admPhone" placeholder="VD: (0238) 123 4567">
+            </div>
+            <div class="adm-field">
+              <label>Email</label>
+              <input type="email" id="admEmail" placeholder="VD: truong@nghean.edu.vn">
+            </div>
+          </div>
+          <hr class="adm-divider">
+          <div class="adm-field">
+            <label>URL API (Google Apps Script)</label>
+            <input type="text" id="admApi" placeholder="https://script.google.com/macros/s/AKfyc.../exec">
+            <small>URL Web App sau khi triển khai GAS. Thay đổi URL này sẽ kết nối tới Google Sheet khác.</small>
+          </div>
+          <div class="adm-actions">
+            <button class="adm-btn adm-btn-primary" onclick="admSaveInfo()">💾 Lưu thay đổi</button>
+          </div>
+        </div>
+
+        <!-- Tab 2: Quản lý dữ liệu -->
+        <div class="admin-section" id="admSecData">
+          <p style="font-size:.85rem;color:#6b7a72;margin-bottom:18px">Chỉnh sửa dữ liệu trực tiếp trong Google Sheet. Sau khi sửa xong, nhấn <b>"Làm mới"</b> để cập nhật.</p>
+          <div id="admSheetLinks">
+            <div class="adm-link-card" style="opacity:.5;pointer-events:none">
+              <div class="adm-link-icon">⏳</div>
+              <div><strong>Đang tải...</strong><span>Chờ kết nối API</span></div>
+            </div>
+          </div>
+          <hr class="adm-divider">
+          <div class="adm-actions">
+            <button class="adm-btn adm-btn-primary" onclick="admRefresh()">🔄 Làm mới dữ liệu</button>
+            <button class="adm-btn adm-btn-danger" onclick="admClearCache()">🗑 Xóa bộ nhớ đệm</button>
+          </div>
+        </div>
+
+        <!-- Tab 3: Đổi mật khẩu -->
+        <div class="admin-section" id="admSecPwd">
+          <div id="admPwdMsg" class="adm-alert"></div>
+          <div class="adm-field">
+            <label>Mật khẩu hiện tại</label>
+            <input type="password" id="admOldPwd">
+          </div>
+          <div class="adm-field">
+            <label>Mật khẩu mới</label>
+            <input type="password" id="admNewPwd">
+          </div>
+          <div class="adm-field">
+            <label>Xác nhận mật khẩu mới</label>
+            <input type="password" id="admNewPwd2">
+          </div>
+          <div class="adm-actions">
+            <button class="adm-btn adm-btn-primary" onclick="admChangePwd()">🔑 Đổi mật khẩu</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="foot-grid">
@@ -439,18 +721,18 @@
   </div>
   <div class="foot-bottom">
     <div>© 2026 Trường Mầm non Diễn Xuân – Xã Quảng Châu, tỉnh Nghệ An</div>
-    <div>Dữ liệu đồng bộ từ Google Sheet · Frontend: GitHub Pages · Backend: Google Apps Script</div>
+    <div>Thiết kế: Chung Trần — Zalo 0913 031 073</div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ====================================================================
   // 🔗 URL API (Google Apps Script /exec) - ĐÃ DÁN SẴN URL CỦA BẠN
   // ====================================================================
   const API_URL = 'https://script.google.com/macros/s/AKfycbxr0jNfPPywDDgtQgBJCdE24cIx3_ZMWcy1FYNXsX5t9fHKhTE3dChC5BqXwXfVotDV/exec';
 
   // ============ STATE ============
-  let HSS = [], TEACHERS = [], CLASSES = [], STATS = {};
+  let HSS = [], TEACHERS = [], CLASSES = [], IMAGES = [], STATS = {};
   let currentClass = null;
   const CAT_ICONS = ['🏫','👩‍🏫','🏢','🤝','👶','🎗️','📁','📁'];
   const CAT_TINTS = ['#d6ecdb','#fff0d1','#dae7ff','#f0dcff','#ffdfd1','#ffe5b4','#e8f5ee','#e8f5ee'];
@@ -525,20 +807,57 @@
   }
 
   function renderSubgroup(g){
-    const directLeaves = (g.children || []).filter(x => x.leaf);
-    const nestedGroups = (g.children || []).filter(x => !x.leaf);
-    const leafCount = countLeaves(g.children || []).t;
-    let nestedHtml = '';
-    nestedGroups.forEach(ng => {
-      const ngLeaves = (ng.children || []).filter(x => x.leaf);
-      nestedHtml += `<div class="sub-nest">
-        <div class="nest-head" onclick="this.parentElement.classList.toggle('open')">
-          <div class="nest-title"><span>📁</span><span>${escapeHtml(ng.code)}. ${escapeHtml(ng.name)}</span></div>
-          <span class="sub-badge">${ngLeaves.length}</span>
-        </div>
-        <div class="nest-list">${renderLeaves(ngLeaves)}</div>
-      </div>`;
+    // Nếu g là leaf (không phải group) → render trực tiếp
+    if(g.leaf) return renderLeaves([g]);
+
+    const children = g.children || [];
+    const leafCount = countLeaves(children).t;
+
+    // Render children ĐÚNG THỨ TỰ gốc (không tách leaves/groups)
+    let innerHtml = '';
+    children.forEach(child => {
+      if(child.leaf){
+        innerHtml += renderLeaves([child]);
+      } else {
+        // Nested group — render đệ quy nếu có sub-groups sâu hơn
+        const nested = child.children || [];
+        const hasDeeper = nested.some(x => !x.leaf);
+        if(hasDeeper){
+          // Có sub-group con → render từng item theo thứ tự
+          let nestInner = '';
+          nested.forEach(n => {
+            if(n.leaf) nestInner += renderLeaves([n]);
+            else {
+              const nLeaves = (n.children || []).filter(x => x.leaf);
+              nestInner += `<div class="sub-nest">
+                <div class="nest-head" onclick="this.parentElement.classList.toggle('open')">
+                  <div class="nest-title"><span>📁</span><span>${escapeHtml(n.code)}. ${escapeHtml(n.name)}</span></div>
+                  <span class="sub-badge">${countLeaves(n.children||[]).t}</span>
+                </div>
+                <div class="nest-list">${renderLeaves(nLeaves)}</div>
+              </div>`;
+            }
+          });
+          innerHtml += `<div class="sub-nest">
+            <div class="nest-head" onclick="this.parentElement.classList.toggle('open')">
+              <div class="nest-title"><span>📁</span><span>${escapeHtml(child.code)}. ${escapeHtml(child.name)}</span></div>
+              <span class="sub-badge">${countLeaves(nested).t}</span>
+            </div>
+            <div class="nest-list">${nestInner}</div>
+          </div>`;
+        } else {
+          // Chỉ có leaves → render đơn giản
+          innerHtml += `<div class="sub-nest">
+            <div class="nest-head" onclick="this.parentElement.classList.toggle('open')">
+              <div class="nest-title"><span>📁</span><span>${escapeHtml(child.code)}. ${escapeHtml(child.name)}</span></div>
+              <span class="sub-badge">${nested.filter(x=>x.leaf).length}</span>
+            </div>
+            <div class="nest-list">${renderLeaves(nested.filter(x=>x.leaf))}</div>
+          </div>`;
+        }
+      }
     });
+
     return `<div class="sub-group">
       <div class="sub-head" onclick="this.parentElement.classList.toggle('open')">
         <div class="sub-title"><span>📂</span><span>${escapeHtml(g.code)}. ${escapeHtml(g.name)}</span></div>
@@ -547,7 +866,7 @@
           <span class="sub-toggle">▸</span>
         </div>
       </div>
-      <div class="sub-list">${renderLeaves(directLeaves)}${nestedHtml}</div>
+      <div class="sub-list">${innerHtml}</div>
     </div>`;
   }
 
@@ -556,7 +875,15 @@
     if(!cat) return;
     document.getElementById('detailIcon').textContent = CAT_ICONS[i] || '📁';
     document.getElementById('detailName').textContent = cat.name;
-    document.getElementById('detailBody').innerHTML = (cat.children || []).map(renderSubgroup).join('');
+
+    // Render children theo đúng thứ tự, xử lý cả leaf lẫn group
+    const children = cat.children || [];
+    let html = '';
+    children.forEach(child => {
+      html += renderSubgroup(child);
+    });
+    document.getElementById('detailBody').innerHTML = html;
+
     const first = document.querySelector('#detailBody .sub-group');
     if(first) first.classList.add('open');
     const detail = document.getElementById('catDetail');
@@ -740,14 +1067,26 @@
     }).join('');
   }
 
+  // ============ GUIDE TABS ============
+  function guideTab(id){
+    const map = {use:'guideUse', faq:'guideFaq'};
+    document.querySelectorAll('.guide-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.guide-panel').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(map[id]).classList.add('active');
+  }
+
   // ============ FAQ ============
   const faqs = [
-    {q:'Làm sao tìm nhanh một hồ sơ?', a:'Dùng ô tìm kiếm ở đầu mục "Hồ sơ số". Gõ từ khóa theo tên hoặc mã (VD: "thi đua", "1.2.1") — danh sách sẽ tự lọc.'},
-    {q:'Vì sao có hồ sơ không thấy nút "Mở"?', a:'Hồ sơ đó chưa được cập nhật link trong Google Sheet. Chấm sẽ chuyển sang màu xám. Chỉ cần dán link Drive vào ô Link trong Sheet là trang web tự cập nhật.'},
-    {q:'Dữ liệu cập nhật thế nào?', a:'Toàn bộ dữ liệu được lưu trên Google Sheet. Khi cán bộ cập nhật trong sheet, chỉ cần reload trang (F5 trên máy tính, kéo xuống làm mới trên điện thoại) là thấy ngay thông tin mới.'},
-    {q:'Xem trên điện thoại có được không?', a:'Hoàn toàn được. Giao diện tự điều chỉnh cho màn hình nhỏ, menu thu gọn thành nút ☰ ở góc phải.'},
-    {q:'Mở hồ sơ trên Drive có cần đăng nhập?', a:'Tùy quyền chia sẻ nhà trường đặt. Nếu folder để "Bất kỳ ai có link xem" thì không cần đăng nhập; nếu để riêng tư thì cần tài khoản được cấp quyền.'},
-    {q:'Ai có thể chỉnh sửa dữ liệu?', a:'Chỉ người được cấp quyền chỉnh sửa Google Sheet nguồn. Trang web chỉ hiển thị (chỉ đọc) nên an toàn cho phụ huynh xem.'}
+    {q:'Làm sao tìm nhanh một hồ sơ?', a:'Dùng ô tìm kiếm ở đầu mục "Hồ sơ số". Gõ từ khóa theo tên hoặc mã (VD: "thi đua", "1.2.1") — danh sách sẽ tự lọc ngay lập tức.'},
+    {q:'Vì sao có hồ sơ hiện chấm xám?', a:'Chấm xám nghĩa là hồ sơ đó chưa có link Drive trong Google Sheet. Mở Sheet tab "Danh muc HSS" → Dán link Drive vào cột "Link" → Nhấn "Làm mới" trên Admin → Chấm chuyển xanh + nút "Mở" xuất hiện.'},
+    {q:'Dữ liệu cập nhật thế nào?', a:'Toàn bộ dữ liệu lưu trên Google Sheet. Khi sửa trong Sheet → vào web nhấn Admin → Dữ liệu → "Làm mới dữ liệu". Hoặc xóa cache trình duyệt (Ctrl+Shift+Delete) rồi reload.'},
+    {q:'Làm sao đổi tên trường, địa chỉ?', a:'Cách 1: Sửa trực tiếp trong Sheet tab "CauHinh" → Cột "Giá trị" → Làm mới. Cách 2: Nhấn Admin → Thông tin → Sửa → Lưu (chỉ lưu trên trình duyệt hiện tại).'},
+    {q:'Thêm ảnh hoạt động vào slideshow?', a:'Mở Sheet tab "Hinh Anh" → Thêm dòng mới: STT, Tiêu đề, Mô tả, Link ảnh (dán link Drive), Loại (truong/hoatdong/banru/lehoi) → Làm mới dữ liệu trên web.'},
+    {q:'Xem trên điện thoại có được không?', a:'Hoàn toàn được. Giao diện tự điều chỉnh cho màn hình nhỏ, menu thu gọn thành nút ☰ ở góc phải. Tất cả tính năng hoạt động bình thường.'},
+    {q:'Trường khác muốn dùng hệ thống này?', a:'Rất đơn giản: (1) Tạo Google Sheet mới → Dán code GAS → Chạy setup() → Sửa dữ liệu mẫu thành dữ liệu trường mình. (2) Copy file HTML → Dán URL API mới vào Admin → Thông tin. (3) Upload HTML lên GitHub Pages. Xong!'},
+    {q:'Mật khẩu Admin quên thì sao?', a:'Xóa dữ liệu trình duyệt (localStorage) hoặc mở Developer Tools (F12) → Console → gõ localStorage.removeItem("mnAdmin") → Enter → Reload. Mật khẩu sẽ về mặc định "admin123".'},
+    {q:'Ai có thể chỉnh sửa dữ liệu?', a:'Chỉ người được cấp quyền chỉnh sửa Google Sheet nguồn. Trang web chỉ hiển thị (chỉ đọc) nên an toàn. Mật khẩu Admin chỉ bảo vệ phần cấu hình trên trình duyệt.'}
   ];
   document.getElementById('faqList').innerHTML = faqs.map(f => `<div class="faq-item">
     <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
@@ -757,10 +1096,25 @@
     <div class="faq-a"><div class="faq-a-inner">${f.a}</div></div>
   </div>`).join('');
 
-  // ============ HERO CAROUSEL ============
-  (function(){
-    const slides = document.querySelectorAll('#carousel .slide');
-    let current = 0; const total = slides.length;
+  // ============ HERO CAROUSEL (ảnh từ Sheet "Hinh Anh") ============
+  const TYPE_LABELS = {truong:'Toàn cảnh',hoatdong:'Hoạt động',banru:'Bán trú',lehoi:'Lễ hội'};
+
+  function renderCarousel(){
+    if(!IMAGES.length) return;
+    const carousel = document.getElementById('carousel');
+    carousel.innerHTML = IMAGES.map((img, i) => {
+      const tag = TYPE_LABELS[img.type] || img.type || 'Mới';
+      return `<div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('${escapeHtml(img.url)}')">
+        <div class="slide-caption">
+          <div><strong>${escapeHtml(img.title)}</strong><span>${escapeHtml(img.desc)}</span></div>
+          <span class="slide-tag" data-type="${escapeHtml(img.type)}">${escapeHtml(tag)}</span>
+        </div>
+      </div>`;
+    }).join('');
+
+    const slides = carousel.querySelectorAll('.slide');
+    let current = 0;
+    const total = slides.length;
     function render(){
       slides.forEach((s, i) => {
         s.classList.remove('active','next','prev');
@@ -769,27 +1123,43 @@
         else if(i === (current-1+total)%total) s.classList.add('prev');
       });
     }
-    setInterval(() => { current = (current+1)%total; render(); }, 3500);
+    setInterval(() => { current = (current+1)%total; render(); }, 5000);
     render();
-  })();
+  }
 
   // ============ FETCH DATA FROM GAS API ============
-  function boot(data){
+  const CACHE_KEY = 'mnDienXuan_data';
+  const CACHE_TTL = 10 * 60 * 1000; // 10 phút — dữ liệu cache hết hạn sau 10 phút
+
+  function boot(data, isCache){
     HSS = data.hss || [];
     TEACHERS = data.teachers || [];
     CLASSES = data.classes || [];
+    IMAGES = data.images || [];
     STATS = data.stats || {};
+    renderCarousel();
     renderStats();
+    admApplyConfig();
     renderCategories();
     renderAgeTabs();
     renderClasses('all');
     renderRoleFilter();
     renderTeachers('all');
-    document.getElementById('loadScreen').classList.add('done');
-    setTimeout(() => document.getElementById('loadScreen').remove(), 500);
+    const ls = document.getElementById('loadScreen');
+    if(ls){ ls.classList.add('done'); setTimeout(() => ls.remove(), 500); }
+    if(isCache){
+      // Đã dùng cache → refresh ngầm từ GAS
+      fetchGAS(function(freshData){
+        try{ localStorage.setItem(CACHE_KEY, JSON.stringify({ts: Date.now(), d: freshData})); } catch(e){}
+        boot(freshData, false);
+      }, function(){}); // im lặng nếu lỗi refresh ngầm
+    }
   }
+
   function loadError(msg){
-    document.getElementById('loadScreen').innerHTML = `
+    const ls = document.getElementById('loadScreen');
+    if(!ls) return;
+    ls.innerHTML = `
       <div style="text-align:center;padding:40px;max-width:560px">
         <div style="font-size:3rem;margin-bottom:20px">⚠️</div>
         <h3 style="font-family:Fraunces,serif;margin-bottom:12px">Không tải được dữ liệu</h3>
@@ -799,34 +1169,247 @@
       </div>`;
   }
 
-  // Dùng JSONP để vượt CORS (GAS không gửi header CORS)
-  function loadData(){
-    if(!API_URL || API_URL.indexOf('AKfyc') === -1){
-      loadError('Chưa cấu hình API_URL trong file Index.html.'); return;
+  // JSONP fetch với retry tự động
+  function fetchGAS(onOk, onFail, retries){
+    retries = retries == null ? 2 : retries;
+    const url = window._admApiOverride || API_URL;
+    if(!url || url.indexOf('AKfyc') === -1){
+      onFail('Chưa cấu hình API_URL.'); return;
     }
-    const cbName = 'jsonpCb_' + Date.now();
+    const cbName = 'jsonpCb_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
     const script = document.createElement('script');
     const timer = setTimeout(() => {
-      delete window[cbName];
-      script.remove();
-      loadError('Quá hạn chờ phản hồi từ máy chủ. Vui lòng kiểm tra kết nối mạng và thử lại.');
-    }, 30000);
+      cleanup();
+      if(retries > 0){ fetchGAS(onOk, onFail, retries - 1); }
+      else { onFail('Quá hạn chờ phản hồi từ máy chủ (đã thử ' + (3 - retries) + ' lần).'); }
+    }, 20000);
+
+    function cleanup(){ clearTimeout(timer); delete window[cbName]; try{ script.remove(); } catch(e){} }
+
     window[cbName] = function(resp){
-      clearTimeout(timer);
-      delete window[cbName];
-      script.remove();
-      if(resp && resp.ok){ boot(resp.data); }
-      else { loadError(resp && resp.error ? resp.error : 'Phản hồi không hợp lệ.'); }
+      cleanup();
+      if(resp && resp.ok){ onOk(resp.data); }
+      else if(retries > 0){ fetchGAS(onOk, onFail, retries - 1); }
+      else { onFail(resp && resp.error ? resp.error : 'Phản hồi không hợp lệ.'); }
     };
-    script.src = API_URL + (API_URL.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + cbName + '&action=all';
+    script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + cbName + '&action=all';
     script.onerror = function(){
-      clearTimeout(timer);
-      delete window[cbName];
-      script.remove();
-      loadError('Không gọi được API. Có thể URL sai hoặc Web App chưa được triển khai với quyền "Anyone".');
+      cleanup();
+      if(retries > 0){ fetchGAS(onOk, onFail, retries - 1); }
+      else { onFail('Không gọi được API. Kiểm tra URL hoặc quyền triển khai.'); }
     };
     document.body.appendChild(script);
   }
+
+  // Khởi động: ưu tiên cache → hiển thị ngay → refresh ngầm
+  function loadData(){
+    try{
+      const raw = localStorage.getItem(CACHE_KEY);
+      if(raw){
+        const cache = JSON.parse(raw);
+        if(cache && cache.d){
+          // Cache còn dùng được → boot ngay, refresh ngầm
+          boot(cache.d, true);
+          return;
+        }
+      }
+    } catch(e){ try{ localStorage.removeItem(CACHE_KEY); } catch(x){} }
+
+    // Không có cache → loading screen + fetch từ GAS
+    fetchGAS(
+      function(data){
+        try{ localStorage.setItem(CACHE_KEY, JSON.stringify({ts: Date.now(), d: data})); } catch(e){}
+        boot(data, false);
+      },
+      function(msg){ loadError(msg); }
+    );
+  }
+  // ============ ADMIN PANEL ============
+  const ADM_KEY = 'mnAdmin';
+  const ADM_DEFAULT_PWD = 'admin123';
+
+  function _admGet(){
+    try{ return JSON.parse(localStorage.getItem(ADM_KEY)) || {}; } catch(e){ return {}; }
+  }
+  function _admSet(obj){
+    const cur = _admGet();
+    Object.assign(cur, obj);
+    try{ localStorage.setItem(ADM_KEY, JSON.stringify(cur)); } catch(e){}
+  }
+  function _admPwd(){ return _admGet().pwd || ADM_DEFAULT_PWD; }
+
+  function openAdmin(){
+    document.getElementById('adminOverlay').classList.add('open');
+    document.getElementById('admPwdInput').value = '';
+    document.getElementById('admLoginMsg').className = 'adm-alert';
+    // Nếu đã đăng nhập trong phiên này
+    if(window._admLoggedIn){
+      document.getElementById('admLogin').style.display = 'none';
+      document.getElementById('admMain').style.display = 'flex';
+      admLoadInfo();
+      admLoadSheetLinks();
+    } else {
+      document.getElementById('admLogin').style.display = '';
+      document.getElementById('admMain').style.display = 'none';
+      setTimeout(() => document.getElementById('admPwdInput').focus(), 200);
+    }
+  }
+  function closeAdmin(){
+    document.getElementById('adminOverlay').classList.remove('open');
+  }
+
+  function admDoLogin(){
+    const input = document.getElementById('admPwdInput').value;
+    if(input === _admPwd()){
+      window._admLoggedIn = true;
+      document.getElementById('admLogin').style.display = 'none';
+      document.getElementById('admMain').style.display = 'flex';
+      admLoadInfo();
+      admLoadSheetLinks();
+    } else {
+      const msg = document.getElementById('admLoginMsg');
+      msg.textContent = '❌ Sai mật khẩu. Mật khẩu mặc định: admin123';
+      msg.className = 'adm-alert err';
+    }
+  }
+
+  function admTab(tab){
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('admSec' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+  }
+
+  // --- Tab 1: Thông tin trường ---
+  function admLoadInfo(){
+    const adm = _admGet();
+    const cfg = STATS.config || {};
+    document.getElementById('admName').value = adm.schoolName || cfg.name || '';
+    document.getElementById('admAddr').value = adm.schoolAddr || cfg.address || '';
+    document.getElementById('admPhone').value = adm.schoolPhone || cfg.phone || '';
+    document.getElementById('admEmail').value = adm.schoolEmail || cfg.email || '';
+    document.getElementById('admYear').value = adm.schoolYear || cfg.schoolYear || '';
+    document.getElementById('admApi').value = adm.apiUrl || API_URL || '';
+  }
+
+  function admSaveInfo(){
+    _admSet({
+      schoolName: document.getElementById('admName').value.trim(),
+      schoolAddr: document.getElementById('admAddr').value.trim(),
+      schoolPhone: document.getElementById('admPhone').value.trim(),
+      schoolEmail: document.getElementById('admEmail').value.trim(),
+      schoolYear: document.getElementById('admYear').value.trim(),
+      apiUrl: document.getElementById('admApi').value.trim()
+    });
+    admApplyConfig();
+    const msg = document.getElementById('admInfoMsg');
+    msg.textContent = '✅ Đã lưu thành công! Trang sẽ sử dụng thông tin mới.';
+    msg.className = 'adm-alert ok';
+    setTimeout(() => msg.className = 'adm-alert', 3000);
+  }
+
+  function admApplyConfig(){
+    const adm = _admGet();
+    if(adm.schoolName){
+      document.querySelectorAll('.logo span').forEach(el => {
+        if(!el.classList.contains('dot')) el.textContent = adm.schoolName.replace(/^Trường\s*/i,'');
+      });
+      document.title = 'Hồ sơ số - ' + adm.schoolName;
+    }
+    if(adm.schoolAddr) document.getElementById('cfgAddress').textContent = adm.schoolAddr;
+    if(adm.schoolPhone) document.getElementById('cfgPhone').textContent = adm.schoolPhone;
+    if(adm.schoolEmail) document.getElementById('cfgEmail').textContent = adm.schoolEmail;
+    if(adm.schoolYear) document.getElementById('schoolYear').textContent = adm.schoolYear;
+    if(adm.schoolName && adm.schoolAddr){
+      const heroP = document.querySelector('.hero-content p');
+      if(heroP) heroP.textContent = '📍 ' + adm.schoolName + ' – ' + adm.schoolAddr;
+    }
+  }
+
+  // --- Tab 2: Quản lý dữ liệu (Sheet links) ---
+  function admLoadSheetLinks(){
+    const sheetUrl = (STATS && STATS.sheetUrl) || _admGet().sheetUrl || '';
+    if(!sheetUrl){
+      document.getElementById('admSheetLinks').innerHTML = `
+        <div class="adm-alert ok" style="display:block">💡 Sau khi dữ liệu tải xong, các liên kết sẽ tự hiện. Hoặc bạn có thể dán URL Google Sheet vào ô bên dưới.</div>
+        <div class="adm-field"><label>URL Google Sheet</label>
+          <input type="text" id="admSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
+          <small>Dán URL Sheet rồi nhấn Lưu</small>
+        </div>
+        <button class="adm-btn adm-btn-outline" onclick="admSaveSheetUrl()">💾 Lưu URL Sheet</button>`;
+      return;
+    }
+    // Lưu sheetUrl nếu từ API
+    if(STATS && STATS.sheetUrl) _admSet({sheetUrl: STATS.sheetUrl});
+
+    const tabs = [
+      {icon:'🏫', name:'Cấu hình trường', tab:'CauHinh', desc:'Tên trường, địa chỉ, SĐT, email, năm học, slogan'},
+      {icon:'📋', name:'Danh mục Hồ sơ số', tab:'Danh muc HSS', desc:'Thêm/sửa/xóa hồ sơ, dán link Google Drive'},
+      {icon:'👩‍🏫', name:'Cán bộ, Giáo viên, NV', tab:'DSGV', desc:'Cập nhật danh sách CBGV, SĐT, email, link hồ sơ'},
+      {icon:'👶', name:'Danh sách Học sinh', tab:'DS HocSinh', desc:'Thông tin trẻ, phụ huynh, lớp học'},
+      {icon:'🖼️', name:'Hình ảnh', tab:'Hinh Anh', desc:'Thêm ảnh mới, dán link Drive, chọn loại ảnh'}
+    ];
+    document.getElementById('admSheetLinks').innerHTML = tabs.map(t => {
+      const url = sheetUrl + '#gid=' + encodeURIComponent(t.tab);
+      return `<a class="adm-link-card" href="${escapeHtml(sheetUrl)}" target="_blank" rel="noopener">
+        <div class="adm-link-icon">${t.icon}</div>
+        <div><strong>${escapeHtml(t.name)}</strong><span>${escapeHtml(t.desc)}</span></div>
+        <span class="adm-link-go">→</span>
+      </a>`;
+    }).join('');
+  }
+
+  function admSaveSheetUrl(){
+    const url = document.getElementById('admSheetUrl').value.trim();
+    if(url) { _admSet({sheetUrl: url}); admLoadSheetLinks(); }
+  }
+
+  function admRefresh(){
+    try{ localStorage.removeItem(CACHE_KEY); } catch(e){}
+    location.reload();
+  }
+
+  function admClearCache(){
+    if(!confirm('Xóa toàn bộ bộ nhớ đệm? Trang sẽ tải lại dữ liệu mới từ Google Sheet.')) return;
+    try{ localStorage.removeItem(CACHE_KEY); } catch(e){}
+    location.reload();
+  }
+
+  // --- Tab 3: Đổi mật khẩu ---
+  function admChangePwd(){
+    const old = document.getElementById('admOldPwd').value;
+    const nw = document.getElementById('admNewPwd').value;
+    const nw2 = document.getElementById('admNewPwd2').value;
+    const msg = document.getElementById('admPwdMsg');
+
+    if(old !== _admPwd()){
+      msg.textContent = '❌ Mật khẩu hiện tại không đúng.';
+      msg.className = 'adm-alert err'; return;
+    }
+    if(!nw || nw.length < 4){
+      msg.textContent = '❌ Mật khẩu mới phải có ít nhất 4 ký tự.';
+      msg.className = 'adm-alert err'; return;
+    }
+    if(nw !== nw2){
+      msg.textContent = '❌ Xác nhận mật khẩu không khớp.';
+      msg.className = 'adm-alert err'; return;
+    }
+    _admSet({pwd: nw});
+    msg.textContent = '✅ Đổi mật khẩu thành công!';
+    msg.className = 'adm-alert ok';
+    document.getElementById('admOldPwd').value = '';
+    document.getElementById('admNewPwd').value = '';
+    document.getElementById('admNewPwd2').value = '';
+    setTimeout(() => msg.className = 'adm-alert', 3000);
+  }
+
+  // Áp dụng config từ localStorage khi boot
+  function admInitConfig(){
+    const adm = _admGet();
+    if(adm.apiUrl) window._admApiOverride = adm.apiUrl;
+    admApplyConfig();
+  }
+  admInitConfig();
+
   loadData();
 </script>
 
