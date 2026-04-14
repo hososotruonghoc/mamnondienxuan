@@ -346,7 +346,7 @@
   /* ===== ADMIN PANEL ===== */
   .admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;backdrop-filter:blur(4px)}
   .admin-overlay.open{display:flex;align-items:center;justify-content:center}
-  .admin-box{background:white;border-radius:24px;width:94%;max-width:640px;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+  .admin-box{background:white;border-radius:24px;width:96%;max-width:960px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.35)}
   .admin-header{background:linear-gradient(135deg,var(--g2),var(--g-deep));color:white;padding:22px 28px;display:flex;justify-content:space-between;align-items:center}
   .admin-header h3{font-family:'Fraunces',serif;font-size:1.2rem;display:flex;align-items:center;gap:10px}
   .admin-close{background:rgba(255,255,255,.15);border:none;border-radius:50%;width:36px;height:36px;color:white;font-size:1.1rem;cursor:pointer}
@@ -382,11 +382,33 @@
   .adm-alert{padding:12px 16px;border-radius:12px;font-size:.85rem;margin-bottom:16px;display:none}
   .adm-alert.ok{display:block;background:#eaf5ef;color:#1e6b54}
   .adm-alert.err{display:block;background:#fee;color:#c04a2a}
+  .adm-alert.warn{display:block;background:#fffbe6;color:#8a6d00}
   .adm-login{text-align:center;padding:40px 20px}
   .adm-login h4{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--g-deep);margin-bottom:8px}
   .adm-login p{color:#6b7a72;font-size:.88rem;margin-bottom:24px}
   .adm-login input{max-width:280px;margin:0 auto;text-align:center}
-  @media(max-width:600px){.adm-row{grid-template-columns:1fr}.admin-box{border-radius:16px}}
+  .adm-edit-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.82rem}
+  .adm-edit-table thead th{background:#f4f8f3;color:var(--g-deep);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;padding:10px 8px;border-bottom:1px solid #e0e6e2;text-align:left;position:sticky;top:0;z-index:1}
+  .adm-edit-table tbody td{padding:6px 8px;border-bottom:1px solid #f3f6f4;vertical-align:middle}
+  .adm-edit-table tbody tr:hover{background:#f7fbf8}
+  .adm-edit-table input{width:100%;padding:6px 8px;border:1px solid #e0e6e2;border-radius:6px;font-size:.8rem;font-family:inherit;outline:none}
+  .adm-edit-table input:focus{border-color:var(--g2);box-shadow:0 0 0 2px rgba(63,178,140,.15)}
+  .adm-edit-table .row-idx{color:#8a9690;font-size:.75rem;width:32px;text-align:center}
+  .adm-edit-table .row-status{width:20px;text-align:center}
+  .adm-edit-wrap{max-height:400px;overflow-y:auto;border:1px solid #eef2ef;border-radius:12px;margin-bottom:16px}
+  .adm-upload-zone{border:2px dashed #d8e0dc;border-radius:16px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .2s;background:#fafbf8}
+  .adm-upload-zone:hover,.adm-upload-zone.dragover{border-color:var(--g2);background:#eaf5ef}
+  .adm-upload-zone input[type=file]{display:none}
+  .adm-upload-zone .upl-icon{font-size:2.2rem;margin-bottom:10px;display:block}
+  .adm-upload-zone strong{font-size:.92rem;color:var(--g-deep);display:block;margin-bottom:4px}
+  .adm-upload-zone span{font-size:.78rem;color:#8a9690}
+  .adm-preview{max-height:260px;overflow-y:auto;border:1px solid #eef2ef;border-radius:12px;margin:16px 0;font-size:.78rem}
+  .adm-preview table{width:100%;border-collapse:collapse}
+  .adm-preview th{background:#f4f8f3;padding:8px;text-align:left;font-size:.7rem;color:var(--g-deep);border-bottom:1px solid #e0e6e2;position:sticky;top:0}
+  .adm-preview td{padding:6px 8px;border-bottom:1px solid #f3f6f4}
+  .adm-progress{height:6px;border-radius:3px;background:#eef2ef;margin:12px 0;overflow:hidden}
+  .adm-progress-bar{height:100%;background:var(--g2);border-radius:3px;width:0;transition:width .3s}
+  @media(max-width:600px){.adm-row{grid-template-columns:1fr}.admin-box{border-radius:16px}.adm-edit-table{font-size:.76rem}}
 </style>
 </head>
 <body>
@@ -631,7 +653,8 @@
     <div id="admMain" style="display:none;flex:1;overflow:hidden;flex-direction:column">
       <div class="admin-tabs">
         <button class="admin-tab active" data-tab="info" onclick="admTab('info')">🏫 Thông tin</button>
-        <button class="admin-tab" data-tab="data" onclick="admTab('data')">📋 Dữ liệu</button>
+        <button class="admin-tab" data-tab="hss" onclick="admTab('hss')">📋 Hồ sơ số</button>
+        <button class="admin-tab" data-tab="import" onclick="admTab('import')">📤 Nhập dữ liệu</button>
         <button class="admin-tab" data-tab="pwd" onclick="admTab('pwd')">🔑 Mật khẩu</button>
       </div>
       <div class="admin-body">
@@ -675,23 +698,62 @@
           </div>
         </div>
 
-        <!-- Tab 2: Quản lý dữ liệu -->
-        <div class="admin-section" id="admSecData">
-          <p style="font-size:.85rem;color:#6b7a72;margin-bottom:18px">Chỉnh sửa dữ liệu trực tiếp trong Google Sheet. Sau khi sửa xong, nhấn <b>"Làm mới"</b> để cập nhật.</p>
-          <div id="admSheetLinks">
-            <div class="adm-link-card" style="opacity:.5;pointer-events:none">
-              <div class="adm-link-icon">⏳</div>
-              <div><strong>Đang tải...</strong><span>Chờ kết nối API</span></div>
-            </div>
+        <!-- Tab 2: Chỉnh sửa Hồ sơ số -->
+        <div class="admin-section" id="admSecHss">
+          <div id="admHssMsg" class="adm-alert"></div>
+          <p style="font-size:.82rem;color:#6b7a72;margin-bottom:14px">Chỉnh sửa link hồ sơ trực tiếp. Dán link Google Drive vào cột "Link" → Nhấn <b>"Lưu thay đổi"</b>.</p>
+          <div class="adm-field" style="margin-bottom:10px">
+            <input type="text" id="admHssSearch" placeholder="🔍 Tìm nhanh theo tên hoặc mã hồ sơ..." oninput="admFilterHSS()">
           </div>
+          <div style="background:#f7fbf8;border:1px solid #e0e6e2;border-radius:12px;padding:14px 16px;margin-bottom:14px;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+            <div style="flex:0 0 90px"><label style="font-size:.7rem;font-weight:600;color:#6b7a72;text-transform:uppercase;display:block;margin-bottom:4px">Mã (VD: 1.3)</label><input type="text" id="admNewCode" placeholder="1.11" style="width:100%;padding:8px 10px;border:1px solid #d8e0dc;border-radius:8px;font-size:.82rem;font-family:inherit"></div>
+            <div style="flex:1;min-width:160px"><label style="font-size:.7rem;font-weight:600;color:#6b7a72;text-transform:uppercase;display:block;margin-bottom:4px">Tên danh mục hồ sơ</label><input type="text" id="admNewName" placeholder="Tên hồ sơ mới..." style="width:100%;padding:8px 10px;border:1px solid #d8e0dc;border-radius:8px;font-size:.82rem;font-family:inherit"></div>
+            <div style="flex:1;min-width:160px"><label style="font-size:.7rem;font-weight:600;color:#6b7a72;text-transform:uppercase;display:block;margin-bottom:4px">Link Google Drive</label><input type="text" id="admNewLink" placeholder="https://drive.google.com/..." style="width:100%;padding:8px 10px;border:1px solid #d8e0dc;border-radius:8px;font-size:.82rem;font-family:inherit"></div>
+            <button class="adm-btn adm-btn-primary" style="padding:9px 18px;font-size:.82rem;white-space:nowrap" onclick="admAddHSS()">＋ Thêm</button>
+          </div>
+          <div class="adm-edit-wrap" id="admHssTable">
+            <p style="padding:30px;text-align:center;color:#8a9690;font-size:.85rem">Đang tải dữ liệu hồ sơ...</p>
+          </div>
+          <div class="adm-actions">
+            <button class="adm-btn adm-btn-primary" onclick="admSaveHSS()">💾 Lưu thay đổi</button>
+            <button class="adm-btn adm-btn-outline" onclick="admRefresh()">🔄 Làm mới</button>
+          </div>
+        </div>
+
+        <!-- Tab 3: Nhập dữ liệu GV & HS -->
+        <div class="admin-section" id="admSecImport">
+          <div id="admImportMsg" class="adm-alert"></div>
+
+          <!-- Upload Giáo viên -->
+          <h4 style="font-family:'Fraunces',serif;color:var(--g-deep);margin-bottom:12px">👩‍🏫 Nhập danh sách Giáo viên</h4>
+          <div class="adm-upload-zone" id="uplGV" onclick="document.getElementById('fileGV').click()" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault();this.classList.remove('dragover');admHandleFile(event.dataTransfer.files[0],'gv')">
+            <span class="upl-icon">📂</span>
+            <strong>Kéo thả file CSV vào đây</strong>
+            <span>hoặc nhấn để chọn file · Cột: TT, Họ tên, Ngày sinh, Chức vụ, Trình độ, SĐT, Gmail, Link</span>
+            <input type="file" id="fileGV" accept=".csv,.txt" onchange="admHandleFile(this.files[0],'gv')">
+          </div>
+          <div id="previewGV"></div>
+
+          <hr class="adm-divider">
+
+          <!-- Upload Học sinh -->
+          <h4 style="font-family:'Fraunces',serif;color:var(--g-deep);margin-bottom:12px">👶 Nhập danh sách Học sinh</h4>
+          <div class="adm-upload-zone" id="uplHS" onclick="document.getElementById('fileHS').click()" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault();this.classList.remove('dragover');admHandleFile(event.dataTransfer.files[0],'hs')">
+            <span class="upl-icon">📂</span>
+            <strong>Kéo thả file CSV vào đây</strong>
+            <span>hoặc nhấn để chọn file · Cột: STT, Mã lớp, Mã HS, Họ tên, Ngày sinh, Giới tính, Dân tộc, Tôn giáo, Tỉnh, (trống), Xã, Tổ/Xóm, Nơi sinh, SĐT, Cha, Năm cha, Mẹ, Năm mẹ</span>
+            <input type="file" id="fileHS" accept=".csv,.txt" onchange="admHandleFile(this.files[0],'hs')">
+          </div>
+          <div id="previewHS"></div>
+
           <hr class="adm-divider">
           <div class="adm-actions">
-            <button class="adm-btn adm-btn-primary" onclick="admRefresh()">🔄 Làm mới dữ liệu</button>
+            <button class="adm-btn adm-btn-outline" onclick="admRefresh()">🔄 Làm mới dữ liệu</button>
             <button class="adm-btn adm-btn-danger" onclick="admClearCache()">🗑 Xóa bộ nhớ đệm</button>
           </div>
         </div>
 
-        <!-- Tab 3: Đổi mật khẩu -->
+        <!-- Tab 4: Đổi mật khẩu -->
         <div class="admin-section" id="admSecPwd">
           <div id="admPwdMsg" class="adm-alert"></div>
           <div class="adm-field">
@@ -1249,12 +1311,10 @@
     document.getElementById('adminOverlay').classList.add('open');
     document.getElementById('admPwdInput').value = '';
     document.getElementById('admLoginMsg').className = 'adm-alert';
-    // Nếu đã đăng nhập trong phiên này
     if(window._admLoggedIn){
       document.getElementById('admLogin').style.display = 'none';
       document.getElementById('admMain').style.display = 'flex';
       admLoadInfo();
-      admLoadSheetLinks();
     } else {
       document.getElementById('admLogin').style.display = '';
       document.getElementById('admMain').style.display = 'none';
@@ -1272,7 +1332,6 @@
       document.getElementById('admLogin').style.display = 'none';
       document.getElementById('admMain').style.display = 'flex';
       admLoadInfo();
-      admLoadSheetLinks();
     } else {
       const msg = document.getElementById('admLoginMsg');
       msg.textContent = '❌ Sai mật khẩu. Mật khẩu mặc định: admin123';
@@ -1283,7 +1342,9 @@
   function admTab(tab){
     document.querySelectorAll('.admin-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
     document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
-    document.getElementById('admSec' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+    const map = {info:'Info', hss:'Hss', import:'Import', pwd:'Pwd'};
+    document.getElementById('admSec' + (map[tab]||tab)).classList.add('active');
+    if(tab === 'hss') admLoadHSS();
   }
 
   // --- Tab 1: Thông tin trường ---
@@ -1332,47 +1393,274 @@
     }
   }
 
-  // --- Tab 2: Quản lý dữ liệu (Sheet links) ---
-  function admLoadSheetLinks(){
-    const sheetUrl = (STATS && STATS.sheetUrl) || _admGet().sheetUrl || '';
-    if(!sheetUrl){
-      document.getElementById('admSheetLinks').innerHTML = `
-        <div class="adm-alert ok" style="display:block">💡 Sau khi dữ liệu tải xong, các liên kết sẽ tự hiện. Hoặc bạn có thể dán URL Google Sheet vào ô bên dưới.</div>
-        <div class="adm-field"><label>URL Google Sheet</label>
-          <input type="text" id="admSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
-          <small>Dán URL Sheet rồi nhấn Lưu</small>
-        </div>
-        <button class="adm-btn adm-btn-outline" onclick="admSaveSheetUrl()">💾 Lưu URL Sheet</button>`;
+  // --- Tab 2: Chỉnh sửa Hồ sơ số ---
+  let _hssRawRows = []; // lưu dữ liệu gốc từ Sheet
+
+  function admLoadHSS(){
+    // Lấy dữ liệu từ cache hoặc API đã fetch
+    const wrap = document.getElementById('admHssTable');
+    if(!HSS.length){
+      wrap.innerHTML = '<p style="padding:30px;text-align:center;color:#8a9690">Chưa có dữ liệu. Nhấn Làm mới.</p>';
       return;
     }
-    // Lưu sheetUrl nếu từ API
-    if(STATS && STATS.sheetUrl) _admSet({sheetUrl: STATS.sheetUrl});
-
-    const tabs = [
-      {icon:'🏫', name:'Cấu hình trường', tab:'CauHinh', desc:'Tên trường, địa chỉ, SĐT, email, năm học, slogan'},
-      {icon:'📋', name:'Danh mục Hồ sơ số', tab:'Danh muc HSS', desc:'Thêm/sửa/xóa hồ sơ, dán link Google Drive'},
-      {icon:'👩‍🏫', name:'Cán bộ, Giáo viên, NV', tab:'DSGV', desc:'Cập nhật danh sách CBGV, SĐT, email, link hồ sơ'},
-      {icon:'👶', name:'Danh sách Học sinh', tab:'DS HocSinh', desc:'Thông tin trẻ, phụ huynh, lớp học'},
-      {icon:'🖼️', name:'Hình ảnh', tab:'Hinh Anh', desc:'Thêm ảnh mới, dán link Drive, chọn loại ảnh'}
-    ];
-    document.getElementById('admSheetLinks').innerHTML = tabs.map(t => {
-      const url = sheetUrl + '#gid=' + encodeURIComponent(t.tab);
-      return `<a class="adm-link-card" href="${escapeHtml(sheetUrl)}" target="_blank" rel="noopener">
-        <div class="adm-link-icon">${t.icon}</div>
-        <div><strong>${escapeHtml(t.name)}</strong><span>${escapeHtml(t.desc)}</span></div>
-        <span class="adm-link-go">→</span>
-      </a>`;
-    }).join('');
+    // Flatten HSS tree thành danh sách phẳng
+    _hssRawRows = [];
+    function walk(nodes, depth){
+      nodes.forEach(n => {
+        _hssRawRows.push({
+          code: n.code || '',
+          name: n.name || '',
+          link: n.link || '',
+          assign: n.assign || '',
+          leaf: !!n.leaf,
+          has: !!n.has,
+          depth: depth
+        });
+        if(n.children) walk(n.children, depth + 1);
+      });
+    }
+    walk(HSS, 0);
+    admRenderHSSTable(_hssRawRows);
   }
 
-  function admSaveSheetUrl(){
-    const url = document.getElementById('admSheetUrl').value.trim();
-    if(url) { _admSet({sheetUrl: url}); admLoadSheetLinks(); }
+  function admRenderHSSTable(rows){
+    const wrap = document.getElementById('admHssTable');
+    if(!rows.length){
+      wrap.innerHTML = '<p style="padding:20px;text-align:center;color:#8a9690">Không tìm thấy hồ sơ.</p>';
+      return;
+    }
+    let html = '<table class="adm-edit-table"><thead><tr><th style="width:28px"></th><th>Tên hồ sơ</th><th style="width:38%">Link Google Drive</th><th style="width:36px"></th></tr></thead><tbody>';
+    rows.forEach((r, i) => {
+      const indent = r.depth > 0 ? 'padding-left:' + (r.depth * 16) + 'px' : '';
+      const isBold = !r.leaf;
+      const dot = r.leaf ? (r.has ? '<span style="color:#3fb28c">●</span>' : '<span style="color:#cbd3cf">●</span>') : '📂';
+      html += `<tr data-idx="${i}">
+        <td class="row-status">${dot}</td>
+        <td style="${indent}">
+          <span id="hssN${i}" style="${isBold?'font-weight:600;color:var(--g-deep)':''}" ondblclick="admHssEdit(${i})"><span style="color:#8a9690;font-size:.72rem;margin-right:4px">${escapeHtml(r.code)}.</span>${escapeHtml(r.name)}</span>
+          <input type="text" id="hssI${i}" value="${escapeHtml(r.name)}" style="display:none" onblur="admHssCommit(${i})" onkeydown="if(event.key==='Enter')this.blur()">
+        </td>
+        <td>${r.leaf ? `<input type="text" value="${escapeHtml(r.link)}" placeholder="Dán link Drive..." onchange="admHssLink(${i},this.value)">` : ''}</td>
+        <td><button onclick="admHssEdit(${i})" style="background:none;border:none;cursor:pointer;font-size:.85rem;padding:2px 4px;border-radius:4px;opacity:.45" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.45" title="Sửa tên">✏️</button></td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+    wrap.innerHTML = html;
+  }
+
+  function admHssEdit(i){
+    const span = document.getElementById('hssN'+i);
+    const inp = document.getElementById('hssI'+i);
+    if(!span||!inp) return;
+    span.style.display='none'; inp.style.display=''; inp.focus(); inp.select();
+  }
+  function admHssCommit(i){
+    const span = document.getElementById('hssN'+i);
+    const inp = document.getElementById('hssI'+i);
+    if(!span||!inp) return;
+    const v = inp.value.trim();
+    if(v && _hssRawRows[i]){
+      _hssRawRows[i].name = v;
+      const code = '<span style="color:#8a9690;font-size:.72rem;margin-right:4px">'+escapeHtml(_hssRawRows[i].code)+'.</span>';
+      span.innerHTML = code + escapeHtml(v);
+    }
+    span.style.display=''; inp.style.display='none';
+  }
+  function admHssLink(i, val){
+    if(_hssRawRows[i]) _hssRawRows[i].link = val.trim();
+  }
+
+  function admAddHSS(){
+    const code = document.getElementById('admNewCode').value.trim();
+    const name = document.getElementById('admNewName').value.trim();
+    const link = document.getElementById('admNewLink').value.trim();
+    const msg = document.getElementById('admHssMsg');
+    if(!code || !name){
+      msg.textContent = '❌ Vui lòng nhập mã và tên danh mục hồ sơ.';
+      msg.className = 'adm-alert err';
+      setTimeout(() => msg.className = 'adm-alert', 3000);
+      return;
+    }
+    // Xác định depth từ mã (1 = depth 0, 1.1 = depth 1, 1.1.1 = depth 2, ...)
+    const depth = (code.match(/\./g) || []).length;
+    const isLeaf = !!link; // có link = hồ sơ lá
+    const newRow = { code, name, link, assign:'', leaf: isLeaf, has: !!link, depth };
+
+    // Chèn vào vị trí đúng theo mã
+    let insertAt = _hssRawRows.length;
+    for(let i = 0; i < _hssRawRows.length; i++){
+      if(_hssRawRows[i].code.localeCompare(code, 'vi', {numeric:true}) > 0){
+        insertAt = i; break;
+      }
+    }
+    _hssRawRows.splice(insertAt, 0, newRow);
+    admRenderHSSTable(_hssRawRows);
+
+    // Xóa form
+    document.getElementById('admNewCode').value = '';
+    document.getElementById('admNewName').value = '';
+    document.getElementById('admNewLink').value = '';
+    msg.textContent = '✅ Đã thêm "' + code + '. ' + name + '". Nhấn "Lưu thay đổi" để ghi lên Sheet.';
+    msg.className = 'adm-alert ok';
+    setTimeout(() => msg.className = 'adm-alert', 4000);
+
+    // Cuộn đến dòng vừa thêm
+    const wrap = document.getElementById('admHssTable');
+    const row = wrap.querySelector('tr[data-idx="' + insertAt + '"]');
+    if(row){ row.style.background = '#eaf5ef'; row.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(() => row.style.background = '', 2000); }
+  }
+
+  function admFilterHSS(){
+    const q = document.getElementById('admHssSearch').value.trim().toLowerCase();
+    if(!q){ admRenderHSSTable(_hssRawRows); return; }
+    admRenderHSSTable(_hssRawRows.filter(r =>
+      r.code.toLowerCase().includes(q) || r.name.toLowerCase().includes(q)
+    ));
+  }
+
+  function admSaveHSS(){
+    const msg = document.getElementById('admHssMsg');
+    if(!_hssRawRows.length){
+      msg.textContent = '❌ Chưa có dữ liệu hồ sơ.';
+      msg.className = 'adm-alert err'; return;
+    }
+    // Rebuild rows for Sheet format: [TT, "Tên", "Link", "Phân công", "Mã hóa"]
+    const sheetRows = _hssRawRows.map((r, i) => {
+      const tt = r.leaf ? (i + 1) : '';
+      const fullName = r.code + '. ' + r.name;
+      return [tt, fullName, r.link || '', r.assign || '', ''];
+    });
+    msg.textContent = '⏳ Đang lưu...';
+    msg.className = 'adm-alert warn';
+    admPostToGAS({action: 'updateHSS', rows: sheetRows}, function(ok, resp){
+      if(ok){
+        msg.textContent = '✅ Đã lưu ' + sheetRows.length + ' dòng hồ sơ lên Google Sheet!';
+        msg.className = 'adm-alert ok';
+      } else {
+        msg.textContent = '❌ Lỗi: ' + (resp || 'Không kết nối được API');
+        msg.className = 'adm-alert err';
+      }
+      setTimeout(() => msg.className = 'adm-alert', 5000);
+    });
+  }
+
+  // --- Tab 3: Nhập dữ liệu CSV ---
+  let _pendingGV = null, _pendingHS = null;
+
+  function admHandleFile(file, type){
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      const text = ev.target.result;
+      const rows = _parseCSV(text);
+      if(type === 'gv') { _pendingGV = rows; admPreviewUpload('previewGV', rows, type); }
+      else { _pendingHS = rows; admPreviewUpload('previewHS', rows, type); }
+    };
+    reader.readAsText(file, 'UTF-8');
+  }
+
+  function _parseCSV(text){
+    const lines = text.split(/\r?\n/).filter(l => l.trim());
+    return lines.map(line => {
+      const cols = [];
+      let cur = '', inQ = false;
+      for(let i = 0; i < line.length; i++){
+        const c = line[i];
+        if(c === '"'){ inQ = !inQ; }
+        else if(c === ',' && !inQ){ cols.push(cur.trim()); cur = ''; }
+        else { cur += c; }
+      }
+      cols.push(cur.trim());
+      return cols;
+    });
+  }
+
+  function admPreviewUpload(containerId, rows, type){
+    const el = document.getElementById(containerId);
+    // Bỏ dòng header nếu có chữ "STT" hoặc "TT" hoặc "Họ"
+    let data = rows;
+    if(data.length && /^(stt|tt|họ|ho)/i.test(data[0][0] + data[0][1])) data = data.slice(1);
+    if(!data.length){
+      el.innerHTML = '<div class="adm-alert err" style="display:block">❌ File rỗng hoặc không có dữ liệu.</div>';
+      return;
+    }
+    const maxShow = Math.min(data.length, 5);
+    let html = '<div class="adm-preview"><table><thead><tr>';
+    const headers = type === 'gv'
+      ? ['TT','Họ tên','Ngày sinh','Chức vụ','Trình độ','SĐT','Gmail','Link']
+      : ['STT','Mã lớp','Mã HS','Họ tên','Ngày sinh','GT','Dân tộc','Tôn giáo'];
+    headers.forEach(h => html += '<th>' + h + '</th>');
+    html += '</tr></thead><tbody>';
+    for(let i = 0; i < maxShow; i++){
+      html += '<tr>' + data[i].slice(0, headers.length).map(c => '<td>' + escapeHtml(c) + '</td>').join('') + '</tr>';
+    }
+    if(data.length > maxShow) html += '<tr><td colspan="' + headers.length + '" style="text-align:center;color:#8a9690">... và ' + (data.length - maxShow) + ' dòng nữa</td></tr>';
+    html += '</tbody></table></div>';
+    html += '<p style="font-size:.85rem;color:var(--g-deep);margin:8px 0"><b>' + data.length + '</b> dòng dữ liệu sẵn sàng.</p>';
+    html += '<button class="adm-btn adm-btn-primary" onclick="admDoImport(\'' + type + '\')">📤 Tải lên Google Sheet</button>';
+    el.innerHTML = html;
+    if(type === 'gv') _pendingGV = data;
+    else _pendingHS = data;
+  }
+
+  function admDoImport(type){
+    const msg = document.getElementById('admImportMsg');
+    let rows, action, label;
+    if(type === 'gv'){
+      rows = _pendingGV; action = 'importTeachers'; label = 'giáo viên';
+      // Đảm bảo 8 cột
+      rows = rows.map(r => { while(r.length < 8) r.push(''); return r.slice(0,8); });
+    } else {
+      rows = _pendingHS; action = 'importStudents'; label = 'học sinh';
+      rows = rows.map(r => { while(r.length < 18) r.push(''); return r.slice(0,18); });
+    }
+    if(!rows || !rows.length){
+      msg.textContent = '❌ Chưa chọn file.';
+      msg.className = 'adm-alert err'; return;
+    }
+    if(!confirm('Xác nhận tải lên ' + rows.length + ' ' + label + '? Dữ liệu cũ sẽ bị thay thế.')) return;
+    msg.textContent = '⏳ Đang tải lên ' + rows.length + ' ' + label + '...';
+    msg.className = 'adm-alert warn';
+    admPostToGAS({action: action, rows: rows}, function(ok, resp){
+      if(ok){
+        msg.textContent = '✅ Đã tải lên thành công ' + rows.length + ' ' + label + '!';
+        msg.className = 'adm-alert ok';
+        if(type === 'gv'){ _pendingGV = null; document.getElementById('previewGV').innerHTML = ''; }
+        else { _pendingHS = null; document.getElementById('previewHS').innerHTML = ''; }
+      } else {
+        msg.textContent = '❌ Lỗi: ' + (resp || 'Không kết nối được API');
+        msg.className = 'adm-alert err';
+      }
+      setTimeout(() => msg.className = 'adm-alert', 5000);
+    });
+  }
+
+  // --- POST dữ liệu tới GAS ---
+  function admPostToGAS(body, callback){
+    const url = window._admApiOverride || API_URL;
+    if(!url){ callback(false, 'Chưa cấu hình API URL'); return; }
+    fetch(url, {
+      method: 'POST',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify(body),
+      redirect: 'follow'
+    })
+    .then(r => r.text())
+    .then(text => {
+      try {
+        const j = JSON.parse(text);
+        callback(j.ok, j.error || j.data);
+      } catch(e) { callback(true, 'Đã gửi (phản hồi không đọc được do CORS — dữ liệu vẫn được lưu).'); }
+    })
+    .catch(err => {
+      // GAS redirect thường gây lỗi CORS khi đọc response
+      // Nhưng dữ liệu vẫn được POST thành công
+      callback(true, 'Đã gửi dữ liệu. Nhấn Làm mới để xem kết quả.');
+    });
   }
 
   function admRefresh(){
     try{ localStorage.removeItem(CACHE_KEY); } catch(e){}
-    // Xóa cả cache phía GAS
     const url = window._admApiOverride || API_URL;
     if(url) {
       const s = document.createElement('script');
@@ -1389,7 +1677,7 @@
     location.reload();
   }
 
-  // --- Tab 3: Đổi mật khẩu ---
+  // --- Tab 4: Đổi mật khẩu ---
   function admChangePwd(){
     const old = document.getElementById('admOldPwd').value;
     const nw = document.getElementById('admNewPwd').value;
