@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hồ sơ số - Trường Mầm non Diễn Xuân</title>
+<meta name="description" content="Hồ sơ số chính thức Trường Mầm non Diễn Xuân, xã Quảng Châu, tỉnh Nghệ An">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--g1:#8dd3a8;--g2:#3fb28c;--g3:#2d8a6e;--g-deep:#1e6b54;--cream:#fdfbf4;--ink:#142a23;--accent:#ffd66b;--coral:#ff8a6b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Be Vietnam Pro',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden}
+  .display{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.02em;line-height:1.05}
+
+  #loadScreen{position:fixed;inset:0;background:linear-gradient(135deg,var(--g1),var(--g3));z-index:9999;display:grid;place-items:center;color:white;transition:opacity .4s}
+  #loadScreen.done{opacity:0;pointer-events:none}
+  .spin{width:54px;height:54px;border:4px solid rgba(255,255,255,.25);border-top-color:var(--accent);border-radius:50%;animation:spn 1s linear infinite;margin:0 auto 20px}
+  @keyframes spn{to{transform:rotate(360deg)}}
+  #loadScreen p{font-family:'Fraunces',serif;font-size:1.1rem;letter-spacing:.05em}
+
+  nav{position:absolute;top:0;left:0;right:0;z-index:10;padding:28px 6vw;display:flex;align-items:center;justify-content:space-between;color:white}
+  .logo{display:flex;align-items:center;gap:12px;font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700}
+  .logo-mark{width:42px;height:42px;border-radius:50%;background:var(--cream);display:grid;place-items:center;font-size:1.4rem;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+  .nav-links{display:flex;gap:30px;list-style:none;font-size:.9rem;font-weight:500}
+  .nav-links a{color:white;text-decoration:none;opacity:.88;position:relative}
+  .nav-links a:hover{opacity:1}
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--accent);transition:width .25s}
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{background:rgba(255,255,255,.15);backdrop-filter:blur(10px);padding:10px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.3);color:white;font-size:.85rem;cursor:pointer}
+  .hamburger{display:none;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);width:44px;height:44px;border-radius:12px;color:white;cursor:pointer;font-size:1.3rem;align-items:center;justify-content:center}
+  .mobile-menu{display:none;position:fixed;top:0;right:0;bottom:0;width:82%;max-width:340px;background:linear-gradient(160deg,var(--g2),var(--g-deep));z-index:100;padding:80px 30px 30px;transform:translateX(100%);transition:transform .35s ease;box-shadow:-20px 0 60px rgba(0,0,0,.3)}
+  .mobile-menu.open{transform:translateX(0)}
+  .mobile-menu a{display:block;color:white;text-decoration:none;padding:16px 0;font-size:1.1rem;font-family:'Fraunces',serif;border-bottom:1px solid rgba(255,255,255,.15)}
+  .mobile-menu .nav-cta{width:100%;margin-top:24px;font-size:.95rem;padding:14px}
+  .mobile-close{position:absolute;top:20px;right:20px;width:42px;height:42px;background:rgba(255,255,255,.15);border:none;border-radius:50%;color:white;font-size:1.2rem;cursor:pointer}
+  .mobile-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99}
+  .mobile-backdrop.open{display:block}
+
+  .hero{position:relative;min-height:88vh;background:radial-gradient(ellipse at 80% 20%,#5cc9a7 0%,transparent 55%),radial-gradient(ellipse at 20% 40%,#9ddab8 0%,transparent 50%),linear-gradient(135deg,var(--g1) 0%,var(--g2) 55%,var(--g3) 100%);padding:140px 6vw 180px;color:white;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.15) 1px,transparent 0);background-size:32px 32px;opacity:.4}
+  .hero-content{position:relative;max-width:760px}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;background:rgba(255,255,255,.15);padding:8px 18px;border-radius:999px;backdrop-filter:blur(8px);margin-bottom:28px}
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero h1{font-size:clamp(2.6rem,5.5vw,4.8rem);margin-bottom:24px}
+  .hero h1 em{font-style:italic;font-weight:400;color:var(--accent)}
+  .hero p{font-size:1.1rem;max-width:560px;opacity:.92;margin-bottom:36px}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+  .btn{padding:14px 28px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:500;display:inline-flex;align-items:center;gap:10px;transition:all .2s;text-decoration:none}
+  .btn-primary{background:var(--cream);color:var(--g-deep)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.2)}
+  .btn-ghost{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.5)}
+  .btn-ghost:hover{background:rgba(255,255,255,.12)}
+
+  .hero-carousel{position:absolute;right:6vw;top:50%;transform:translateY(-50%);width:380px;height:480px;perspective:1200px}
+  .hero-carousel::before{content:'';position:absolute;inset:-40px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,107,.35),transparent 70%);animation:drift 10s ease-in-out infinite;z-index:0}
+  @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,20px)}}
+  .slide{position:absolute;inset:0;border-radius:28px;overflow:hidden;background-size:cover;background-position:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.35),0 0 0 6px rgba(255,255,255,.2);opacity:0;transform:translateX(60px) rotate(8deg) scale(.9);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+  .slide.active{opacity:1;transform:translateX(0) rotate(-3deg) scale(1);z-index:3}
+  .slide.next{opacity:.6;transform:translateX(40px) translateY(20px) rotate(5deg) scale(.92);z-index:2}
+  .slide.prev{opacity:.4;transform:translateX(-30px) translateY(30px) rotate(-8deg) scale(.88);z-index:1}
+  .slide-caption{position:absolute;left:20px;bottom:20px;right:20px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);padding:14px 18px;border-radius:14px;color:var(--ink);display:flex;justify-content:space-between;align-items:center}
+  .slide-caption strong{font-family:'Fraunces',serif;font-size:.95rem;display:block}
+  .slide-caption span{font-size:.72rem;color:#6b7a72}
+  .slide-tag{background:var(--g2);color:white;font-size:.7rem;padding:4px 10px;border-radius:999px;font-weight:600}
+  @media(max-width:1100px){.hero-carousel{display:none}}
+
+  .wave-svg{position:absolute;bottom:-1px;left:0;width:100%;display:block}
+
+  .stats{position:relative;margin:-70px 6vw 0;background:var(--cream);border-radius:24px;padding:28px 40px;display:grid;grid-template-columns:repeat(4,1fr);gap:30px;box-shadow:0 20px 60px -20px rgba(30,107,84,.25);z-index:5}
+  .stat-item{text-align:center;border-right:1px solid #e8e4d6}
+  .stat-item:last-child{border-right:none}
+  .stat-num{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:600;color:var(--g3);display:block}
+  .stat-label{font-size:.82rem;color:#6b7a72;letter-spacing:.05em}
+
+  .records{padding:100px 6vw;background:radial-gradient(ellipse at top right,rgba(61,178,140,.08),transparent 60%),var(--cream)}
+  .records-head{text-align:center;max-width:700px;margin:0 auto 40px}
+  .kicker{color:var(--g2);font-weight:600;text-transform:uppercase;font-size:.78rem;letter-spacing:.2em;display:block;margin-bottom:8px}
+  .records-head h2{font-size:clamp(2rem,3.5vw,3rem);color:var(--g-deep);margin-bottom:14px;font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+  .records-search{max-width:600px;margin:0 auto 40px;position:relative}
+  .records-search input{width:100%;padding:16px 22px 16px 52px;border-radius:999px;border:1px solid #e0e6e2;background:white;font-family:inherit;font-size:.95rem;box-shadow:0 8px 24px -12px rgba(30,107,84,.2);outline:none}
+  .records-search input:focus{border-color:var(--g2)}
+  .records-search::before{content:'🔍';position:absolute;left:20px;top:50%;transform:translateY(-50%);opacity:.5}
+  .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1200px;margin:0 auto}
+  .cat-card{background:white;border-radius:20px;padding:28px;border:1px solid #eef2ef;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+  .cat-card::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;background:var(--tint,#e8f5ee);opacity:.6;transition:transform .4s}
+  .cat-card:hover{transform:translateY(-6px);box-shadow:0 25px 50px -20px rgba(30,107,84,.2);border-color:var(--g1)}
+  .cat-card:hover::before{transform:scale(1.4)}
+  .cat-card>*{position:relative}
+  .cat-num{font-family:'Fraunces',serif;font-size:.8rem;color:var(--g2);font-weight:600;letter-spacing:.1em;display:block;margin-bottom:12px}
+  .cat-icon{font-size:2.4rem;margin-bottom:14px;display:block}
+  .cat-card h3{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--ink);margin-bottom:12px;line-height:1.3}
+  .cat-meta{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px dashed #e0e6e2}
+  .cat-count{display:flex;gap:14px;font-size:.78rem;color:#6b7a72}
+  .cat-count b{color:var(--g3);font-family:'Fraunces',serif;font-size:1rem;font-weight:600;margin-right:3px}
+  .cat-arrow{width:36px;height:36px;border-radius:50%;background:var(--g2);color:white;display:grid;place-items:center;transition:transform .3s}
+  .cat-card:hover .cat-arrow{transform:translateX(4px)}
+  .cat-detail{display:none;background:white;border-radius:24px;padding:40px;max-width:1100px;margin:40px auto 0;box-shadow:0 30px 60px -30px rgba(30,107,84,.25)}
+  .cat-detail.active{display:block;animation:fadeSlide .4s ease}
+  @keyframes fadeSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .detail-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid #eef2ef;flex-wrap:wrap;gap:12px}
+  .detail-head h3{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--g-deep);display:flex;align-items:center;gap:12px}
+  .close-btn{background:#f3f6f4;border:none;border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:1rem;color:#6b7a72}
+  .close-btn:hover{background:var(--g2);color:white}
+  .sub-group{border:1px solid #eef2ef;border-radius:14px;margin-bottom:10px;overflow:hidden}
+  .sub-head{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#fafbf8}
+  .sub-head:hover{background:#f0f5f1}
+  .sub-title{display:flex;align-items:center;gap:12px;font-weight:500;color:var(--ink);font-size:.95rem;flex:1;min-width:0}
+  .sub-title span{overflow:hidden;text-overflow:ellipsis}
+  .sub-badge{background:var(--g1);color:var(--g-deep);font-size:.72rem;padding:3px 10px;border-radius:999px;font-weight:600;white-space:nowrap}
+  .sub-toggle{color:#8a9690;transition:transform .3s;flex-shrink:0}
+  .sub-group.open .sub-toggle{transform:rotate(90deg)}
+  .sub-list{max-height:0;overflow:hidden;transition:max-height .5s ease}
+  .sub-group.open .sub-list{max-height:2000px}
+  .leaf{display:flex;align-items:center;gap:14px;padding:12px 20px 12px 52px;border-top:1px solid #f3f6f4;font-size:.88rem}
+  .leaf-code{font-family:'Fraunces',serif;color:var(--g2);font-weight:600;min-width:72px;font-size:.82rem;flex-shrink:0}
+  .leaf-name{flex:1;color:#3a4a42}
+  .status-dot{width:8px;height:8px;border-radius:50%;background:var(--g2);flex-shrink:0}
+  .status-dot.empty{background:#cbd3cf}
+  .open-btn{padding:6px 14px;border-radius:999px;background:var(--g2);color:white;border:none;font-size:.75rem;font-family:inherit;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s;white-space:nowrap}
+  .open-btn:hover{background:var(--g3)}
+  .open-btn.disabled{background:#d8e0dc;color:#8a9690;cursor:not-allowed}
+  .sub-nest{margin:0 20px 8px 20px;border-left:3px solid #e8f5ee;padding:4px 0 4px 14px}
+  .nest-head{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#f7fbf8;border-radius:8px;margin-bottom:4px;font-size:.88rem}
+  .nest-head:hover{background:#eef7f1}
+  .nest-title{display:flex;align-items:center;gap:10px;color:#3a4a42;font-weight:500;flex:1;min-width:0}
+  .sub-nest.open .nest-list{display:block}
+  .nest-list{display:none}
+  .sub-nest .leaf{padding-left:36px;font-size:.85rem}
+
+  .classes{padding:100px 6vw;background:linear-gradient(180deg,var(--g-deep),#165844);color:white;position:relative;overflow:hidden}
+  .classes::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.06) 1px,transparent 0);background-size:32px 32px}
+  .classes-head{text-align:center;margin-bottom:30px;position:relative;z-index:1}
+  .classes-head .kicker{color:var(--accent)}
+  .classes-head h2{font-size:clamp(2rem,3.5vw,3rem);margin-bottom:10px;font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.02em;color:white}
+  .classes-head p{color:rgba(255,255,255,.75);max-width:560px;margin:0 auto}
+  .age-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:30px 0 40px;position:relative;z-index:1}
+  .age-tab{padding:10px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);color:rgba(255,255,255,.85);font-family:inherit;font-size:.85rem;cursor:pointer;backdrop-filter:blur(6px);transition:all .2s}
+  .age-tab.active{background:var(--accent);color:var(--g-deep);border-color:var(--accent);font-weight:600}
+  .class-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+  .class-card{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:24px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+  .class-card::after{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--age-color,#ffd66b)}
+  .class-card:hover{background:rgba(255,255,255,.14);transform:translateY(-4px);border-color:var(--age-color,var(--accent))}
+  .class-card[data-age="nha_tre"]{--age-color:#ff9b7a}
+  .class-card[data-age="mg3"]{--age-color:#ffd66b}
+  .class-card[data-age="mg4"]{--age-color:#7fc99d}
+  .class-card[data-age="mg5"]{--age-color:#8ec5ff}
+  .class-age-chip{display:inline-block;font-size:.68rem;padding:3px 10px;border-radius:999px;background:var(--age-color);color:var(--g-deep);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+  .class-name{font-family:'Fraunces',serif;font-size:1.1rem;color:white;margin-bottom:4px;line-height:1.3}
+  .class-age-text{font-size:.76rem;color:rgba(255,255,255,.65);margin-bottom:16px;display:block}
+  .class-stats{display:flex;gap:14px;padding-top:14px;border-top:1px dashed rgba(255,255,255,.15)}
+  .class-stat{flex:1}
+  .class-stat b{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--accent);display:block;line-height:1}
+  .class-stat small{font-size:.68rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.05em}
+  .class-stat.male b{color:#8ec5ff}
+  .class-stat.female b{color:#ff9b7a}
+  .class-cta{margin-top:12px;font-size:.76rem;color:var(--accent);display:flex;align-items:center;gap:6px;opacity:.9}
+  .students-panel{display:none;background:white;color:var(--ink);border-radius:24px;padding:32px;max-width:1150px;margin:40px auto 0;box-shadow:0 30px 60px -20px rgba(0,0,0,.3);position:relative;z-index:2}
+  .students-panel.active{display:block;animation:fadeSlide .4s ease}
+  .sp-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #eef2ef;flex-wrap:wrap;gap:12px}
+  .sp-head h3{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--g-deep)}
+  .sp-head .sp-meta{font-size:.82rem;color:#6b7a72;margin-top:4px}
+  .sp-search{position:relative;margin-bottom:16px}
+  .sp-search input{width:100%;padding:12px 18px 12px 44px;border-radius:12px;border:1px solid #e0e6e2;font-family:inherit;font-size:.9rem;outline:none}
+  .sp-search input:focus{border-color:var(--g2)}
+  .sp-search::before{content:'🔍';position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.5;font-size:.9rem}
+  .st-table{width:100%;border-collapse:separate;border-spacing:0}
+  .st-table thead th{background:#f4f8f3;color:var(--g-deep);font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:12px 14px;border-bottom:1px solid #e0e6e2}
+  .st-table tbody td{padding:11px 14px;border-bottom:1px solid #f3f6f4;font-size:.86rem;vertical-align:middle}
+  .st-table tbody tr.main{cursor:pointer}
+  .st-table tbody tr.main:hover{background:#f7fbf8}
+  .st-table tbody tr.main.open{background:#f0f7f2}
+  .st-idx{color:#8a9690;font-size:.8rem;width:36px}
+  .st-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--g1),var(--g2));color:white;display:inline-grid;place-items:center;font-family:'Fraunces',serif;font-size:.76rem;font-weight:600;margin-right:10px;vertical-align:middle}
+  .st-avatar.female{background:linear-gradient(135deg,#ff9b7a,#ff7a52)}
+  .st-name{font-weight:500;color:var(--ink)}
+  .st-gender{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:500}
+  .st-gender.m{background:#dae7ff;color:#3858a8}
+  .st-gender.f{background:#ffdfd1;color:#c04a2a}
+  .st-detail-row td{padding:0!important;background:#fafbf8;border-bottom:1px solid #eef2ef}
+  .st-detail-inner{padding:18px 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;animation:fadeSlide .3s ease}
+  .st-field{font-size:.82rem}
+  .st-field strong{display:block;font-size:.68rem;color:#8a9690;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;font-weight:600}
+  .st-field span{color:var(--ink)}
+  .st-empty{padding:40px;text-align:center;color:#8a9690;font-size:.9rem}
+
+  .teachers{padding:100px 6vw;background:linear-gradient(180deg,var(--cream) 0%,#f4f8f3 100%)}
+  .teachers-head{text-align:center;margin-bottom:30px}
+  .teachers-head h2{font-size:clamp(2rem,3.5vw,3rem);color:var(--g-deep);font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
+  .teachers-head p{color:#5a6b64;max-width:560px;margin:0 auto}
+  .role-filter{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:30px 0 40px}
+  .role-chip{padding:10px 22px;border-radius:999px;border:1px solid #d8e0dc;background:white;font-family:inherit;font-size:.85rem;cursor:pointer;color:#5a6b64;transition:all .2s}
+  .role-chip.active{background:var(--g-deep);color:white;border-color:var(--g-deep)}
+  .teacher-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1200px;margin:0 auto}
+  .teacher-card{background:white;border-radius:20px;padding:28px 22px;text-align:center;border:1px solid #eef2ef;transition:all .3s;position:relative;overflow:hidden}
+  .teacher-card::before{content:'';position:absolute;top:0;left:0;right:0;height:90px;background:linear-gradient(135deg,var(--g1),var(--g2))}
+  .teacher-card:nth-child(4n+2)::before{background:linear-gradient(135deg,#ffc973,#ff9b7a)}
+  .teacher-card:nth-child(4n+3)::before{background:linear-gradient(135deg,#7fc99d,#3fb28c)}
+  .teacher-card:nth-child(4n)::before{background:linear-gradient(135deg,#a9c7f5,#6b9fde)}
+  .teacher-card:hover{transform:translateY(-6px);box-shadow:0 25px 50px -20px rgba(30,107,84,.25)}
+  .teacher-avatar{width:82px;height:82px;border-radius:50%;margin:16px auto 16px;background:white;display:grid;place-items:center;font-family:'Fraunces',serif;font-size:1.9rem;font-weight:600;color:var(--g-deep);position:relative;border:4px solid white;box-shadow:0 6px 20px rgba(30,107,84,.2)}
+  .teacher-card h4{font-family:'Fraunces',serif;font-size:1.02rem;margin-bottom:4px;color:var(--ink);position:relative}
+  .teacher-role{font-size:.78rem;color:#6b7a72;margin-bottom:12px;display:block;position:relative;min-height:32px}
+  .teacher-tag{display:inline-block;font-size:.7rem;padding:3px 10px;border-radius:999px;background:#eaf5ef;color:var(--g3);margin-bottom:14px;font-weight:500}
+  .teacher-profile{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;background:var(--g2);color:white;border:none;font-family:inherit;font-size:.76rem;cursor:pointer;text-decoration:none;font-weight:500;transition:background .2s}
+  .teacher-profile:hover{background:var(--g-deep)}
+  .teacher-profile.disabled{background:#d8e0dc;color:#8a9690;pointer-events:none}
+
+  .guide{padding:100px 6vw;background:var(--cream)}
+  .guide-wrap{max-width:900px;margin:0 auto}
+  .guide-head{text-align:center;margin-bottom:40px}
+  .guide-head h2{font-size:clamp(2rem,3.5vw,3rem);color:var(--g-deep);font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.02em}
+  .faq-item{background:white;border-radius:16px;margin-bottom:12px;overflow:hidden;border:1px solid #eef2ef}
+  .faq-item.open{box-shadow:0 15px 35px -15px rgba(30,107,84,.2)}
+  .faq-q{padding:20px 26px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;font-weight:500;color:var(--ink)}
+  .faq-q::before{content:'❓';font-size:1.1rem;flex-shrink:0}
+  .faq-q-text{flex:1;font-size:.95rem}
+  .faq-toggle{width:32px;height:32px;border-radius:50%;background:#eaf5ef;color:var(--g3);display:grid;place-items:center;flex-shrink:0;transition:all .3s;font-size:1rem}
+  .faq-item.open .faq-toggle{background:var(--g2);color:white;transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;color:#5a6b64;font-size:.9rem;line-height:1.7}
+  .faq-item.open .faq-a{max-height:400px}
+  .faq-a-inner{padding:0 26px 22px 62px}
+
+  .locate{padding:80px 6vw;background:white}
+  .locate-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:center;max-width:1200px;margin:0 auto}
+  .locate h2{font-size:2rem;color:var(--g-deep);margin-bottom:16px;font-family:'Fraunces',serif;font-weight:600}
+  .info-row{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed #e0e6e2}
+  .info-row:last-child{border-bottom:none}
+  .info-row .ico{width:42px;height:42px;border-radius:12px;background:#eaf5ef;color:var(--g3);display:grid;place-items:center;flex-shrink:0;font-size:1.1rem}
+  .info-row strong{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:#8a9690;margin-bottom:2px}
+  .map-frame{aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:#d9ead3;box-shadow:0 20px 40px -20px rgba(30,107,84,.3)}
+  .map-frame iframe{width:100%;height:100%;border:none}
+
+  footer{background:#0f4a3a;color:rgba(255,255,255,.8);padding:60px 6vw 30px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1200px;margin:0 auto}
+  .foot-grid h5{color:white;font-family:'Fraunces',serif;font-size:1rem;margin-bottom:18px}
+  .foot-grid a{display:block;color:rgba(255,255,255,.65);text-decoration:none;padding:4px 0;font-size:.9rem}
+  .foot-grid a:hover{color:var(--accent)}
+  .foot-about p{font-size:.9rem;color:rgba(255,255,255,.65);margin-top:14px;max-width:320px}
+  .foot-bottom{margin-top:50px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:.82rem;color:rgba(255,255,255,.5);flex-wrap:wrap;gap:12px}
+
+  @media(max-width:900px){
+    nav{padding:18px 5vw}
+    .logo{font-size:1.05rem}
+    .nav-links,.nav-cta{display:none}
+    .hamburger{display:flex}
+    .mobile-menu{display:block}
+    .hero{padding:110px 5vw 100px;min-height:auto}
+    .hero h1{font-size:2.3rem;line-height:1.1}
+    .hero p{font-size:.98rem}
+    .hero-actions{flex-direction:column;align-items:stretch}
+    .hero-actions .btn{justify-content:center}
+    .stats{grid-template-columns:repeat(2,1fr);margin:-40px 5vw 0;padding:20px;gap:16px}
+    .stat-item:nth-child(2){border-right:none}
+    .stat-item:nth-child(1),.stat-item:nth-child(2){border-bottom:1px solid #e8e4d6;padding-bottom:16px}
+    .stat-num{font-size:1.7rem}
+    .records,.teachers,.guide,.locate,.classes{padding:60px 5vw}
+    .records-head h2,.teachers-head h2,.guide-head h2,.locate h2,.classes-head h2{font-size:1.7rem}
+    .cat-grid{grid-template-columns:1fr;gap:14px}
+    .cat-card{padding:22px}
+    .cat-detail{padding:24px 18px;margin-top:24px}
+    .detail-head h3{font-size:1.1rem}
+    .leaf{padding:12px 14px;flex-wrap:wrap;gap:10px}
+    .leaf-name{flex-basis:100%;order:3;padding-left:22px;font-size:.85rem}
+    .class-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+    .class-card{padding:18px}
+    .class-name{font-size:1rem}
+    .students-panel{padding:20px 16px}
+    .st-table thead{display:none}
+    .st-table,.st-table tbody{display:block;width:100%}
+    .st-table tbody tr{display:block;border:1px solid #eef2ef;border-radius:12px;padding:10px 14px;margin-bottom:8px}
+    .st-table tbody tr.main.open{background:#f0f7f2}
+    .st-table tbody td{display:flex;justify-content:space-between;align-items:center;border:none;padding:5px 0;font-size:.82rem;gap:10px}
+    .st-table tbody td[data-lbl]::before{content:attr(data-lbl);font-weight:600;color:#8a9690;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em}
+    .st-table tbody td.st-name-cell{border-bottom:1px solid #eef2ef;padding-bottom:8px;margin-bottom:4px;justify-content:flex-start}
+    .st-detail-inner{grid-template-columns:1fr;padding:14px;gap:10px}
+    .st-detail-row{display:block!important}
+    .st-detail-row td{display:block!important;padding:0!important}
+    .teacher-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+    .teacher-card{padding:22px 14px}
+    .teacher-avatar{width:70px;height:70px;font-size:1.55rem}
+    .locate-wrap{grid-template-columns:1fr;gap:40px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:30px}
+    .foot-bottom{flex-direction:column;text-align:center}
+  }
+  @media(max-width:480px){
+    .class-grid,.teacher-grid{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr 1fr;padding:16px;gap:12px}
+    .stat-num{font-size:1.5rem}
+    .hero h1{font-size:2rem}
+    .foot-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div id="loadScreen">
+  <div style="text-align:center">
+    <div class="spin"></div>
+    <p>Đang tải dữ liệu từ Google Sheet...</p>
+  </div>
+</div>
+
+<nav>
+  <div class="logo"><div class="logo-mark">🌱</div><span>MN Diễn Xuân</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Trang chủ</a></li>
+    <li><a href="#records">Hồ sơ số</a></li>
+    <li><a href="#classes">Quản lý trẻ</a></li>
+    <li><a href="#teachers">Năng lực GV</a></li>
+    <li><a href="#guide">Hướng dẫn</a></li>
+  </ul>
+  <button class="nav-cta">Đăng nhập phụ huynh</button>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</nav>
+<div class="mobile-backdrop" id="backdrop" onclick="toggleMenu()"></div>
+<aside class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#home" onclick="toggleMenu()">Trang chủ</a>
+  <a href="#records" onclick="toggleMenu()">Hồ sơ số</a>
+  <a href="#classes" onclick="toggleMenu()">Quản lý trẻ</a>
+  <a href="#teachers" onclick="toggleMenu()">Năng lực GV</a>
+  <a href="#guide" onclick="toggleMenu()">Hướng dẫn</a>
+  <a href="#contact" onclick="toggleMenu()">Liên hệ</a>
+</aside>
+
+<section class="hero" id="home">
+  <div class="hero-carousel" id="carousel">
+    <div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&q=80')"><div class="slide-caption"><div><strong>Giờ học vẽ sáng tạo</strong><span>Lớp Lá</span></div><span class="slide-tag">Mới</span></div></div>
+    <div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80')"><div class="slide-caption"><div><strong>Khám phá thiên nhiên</strong><span>Lớp Chồi</span></div><span class="slide-tag">Hot</span></div></div>
+    <div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('https://images.unsplash.com/photo-1544776193-52d4c1cd4ad9?w=600&q=80')"><div class="slide-caption"><div><strong>Hoạt động ngoài trời</strong><span>Toàn trường</span></div><span class="slide-tag">Vui</span></div></div>
+    <div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('https://images.unsplash.com/photo-1587653263995-422546a7a569?w=600&q=80')"><div class="slide-caption"><div><strong>Giờ kể chuyện</strong><span>Lớp Mầm</span></div><span class="slide-tag">Ấm áp</span></div></div>
+    <div class="slide" style="background-image:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.3)),url('https://images.unsplash.com/photo-1564429097439-e4ffc5b1cdb1?w=600&q=80')"><div class="slide-caption"><div><strong>Bữa ăn dinh dưỡng</strong><span>Bếp ăn</span></div><span class="slide-tag">Sức khỏe</span></div></div>
+  </div>
+  <div class="hero-content">
+    <div class="eyebrow"><span class="dot"></span>Hồ sơ số giáo dục <span id="schoolYear">2025 – 2026</span></div>
+    <h1 class="display">Nơi ươm mầm <em>yêu thương</em><br>và chắp cánh ước mơ</h1>
+    <p>Trường Mầm non Diễn Xuân – xã Quảng Châu, tỉnh Nghệ An. Dữ liệu đồng bộ trực tiếp từ Google Sheet, cập nhật theo thời gian thực.</p>
+    <div class="hero-actions">
+      <a href="#records" class="btn btn-primary">Khám phá hồ sơ số →</a>
+      <a href="#teachers" class="btn btn-ghost">Xem đội ngũ GV</a>
+    </div>
+  </div>
+  <svg class="wave-svg" viewBox="0 0 1440 120" preserveAspectRatio="none"><path fill="#fdfbf4" d="M0,64 C240,112 480,16 720,48 C960,80 1200,112 1440,72 L1440,120 L0,120 Z"/></svg>
+</section>
+
+<div class="stats">
+  <div class="stat-item"><span class="stat-num" id="stRecords">–</span><span class="stat-label">Hồ sơ số</span></div>
+  <div class="stat-item"><span class="stat-num" id="stTeachers">–</span><span class="stat-label">CBGV & NV</span></div>
+  <div class="stat-item"><span class="stat-num" id="stClasses">–</span><span class="stat-label">Lớp học</span></div>
+  <div class="stat-item"><span class="stat-num" id="stChildren">–</span><span class="stat-label">Trẻ em</span></div>
+</div>
+
+<section class="records" id="records">
+  <div class="records-head">
+    <span class="kicker">Hệ thống hồ sơ điện tử</span>
+    <h2>Danh mục Hồ sơ số</h2>
+    <p style="color:#5a6b64">Toàn bộ <b id="recCount">75</b> hồ sơ được tổ chức thành 6 nhóm lớn, đồng bộ trực tiếp từ Google Sheet. Click vào thẻ để xem chi tiết và mở hồ sơ trên Google Drive.</p>
+  </div>
+  <div class="records-search"><input type="text" id="recSearch" placeholder="Tìm kiếm theo tên hoặc mã hồ sơ (VD: 1.2.1, thi đua, kế hoạch...)"></div>
+  <div class="cat-grid" id="catGrid"></div>
+  <div class="cat-detail" id="catDetail">
+    <div class="detail-head">
+      <h3><span id="detailIcon">🏫</span><span id="detailName"></span></h3>
+      <button class="close-btn" onclick="closeDetail()">✕</button>
+    </div>
+    <div id="detailBody"></div>
+  </div>
+</section>
+
+<section class="classes" id="classes">
+  <div class="classes-head">
+    <span class="kicker">Quản lý trẻ</span>
+    <h2>Danh sách các lớp</h2>
+    <p>Click vào từng lớp để xem chi tiết thông tin các bé. Dữ liệu đồng bộ trực tiếp từ Google Sheet.</p>
+  </div>
+  <div class="age-tabs" id="ageTabs"></div>
+  <div class="class-grid" id="classGrid"></div>
+  <div class="students-panel" id="studentsPanel">
+    <div class="sp-head">
+      <div>
+        <h3 id="spTitle">Lớp ...</h3>
+        <div class="sp-meta" id="spMeta"></div>
+      </div>
+      <button class="close-btn" onclick="closeStudents()">✕</button>
+    </div>
+    <div class="sp-search"><input type="text" id="stSearch" placeholder="Tìm theo họ tên, tên cha/mẹ..."></div>
+    <div id="stTableWrap"></div>
+  </div>
+</section>
+
+<section class="teachers" id="teachers">
+  <div class="teachers-head">
+    <span class="kicker">Năng lực giáo viên</span>
+    <h2>Hồ sơ CBGV – NV</h2>
+    <p>Đội ngũ cán bộ, giáo viên, nhân viên tận tâm của nhà trường. Click vào mỗi thẻ để mở hồ sơ cá nhân.</p>
+  </div>
+  <div class="role-filter" id="roleFilter"></div>
+  <div class="teacher-grid" id="teacherGrid"></div>
+</section>
+
+<section class="guide" id="guide">
+  <div class="guide-wrap">
+    <div class="guide-head">
+      <span class="kicker">Hướng dẫn sử dụng</span>
+      <h2>Câu hỏi thường gặp</h2>
+    </div>
+    <div id="faqList"></div>
+  </div>
+</section>
+
+<section class="locate" id="contact">
+  <div class="locate-wrap">
+    <div>
+      <span class="kicker">Liên hệ</span>
+      <h2 class="display">Ghé thăm trường chúng tôi</h2>
+      <p style="color:#5a6b64;margin-bottom:24px">Quý phụ huynh có thể liên hệ bất kỳ ngày nào trong tuần.</p>
+      <div class="info-row"><div class="ico">📍</div><div><strong>Địa chỉ</strong><span id="cfgAddress">Xã Quảng Châu, tỉnh Nghệ An</span></div></div>
+      <div class="info-row"><div class="ico">☎</div><div><strong>Điện thoại</strong><span id="cfgPhone">(0238) 123 4567</span></div></div>
+      <div class="info-row"><div class="ico">✉</div><div><strong>Email</strong><span id="cfgEmail">mndienxuan@nghean.edu.vn</span></div></div>
+      <div class="info-row"><div class="ico">🕐</div><div><strong>Giờ đón trẻ</strong>6:45 – 17:15 (T2 – T6)</div></div>
+    </div>
+    <div class="map-frame"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=105.6%2C19.0%2C105.8%2C19.2&layer=mapnik" loading="lazy"></iframe></div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-about">
+      <div class="logo" style="color:white"><div class="logo-mark">🌱</div><span>MN Diễn Xuân</span></div>
+      <p>Hồ sơ số chính thức của Trường Mầm non Diễn Xuân – xã Quảng Châu, tỉnh Nghệ An.</p>
+    </div>
+    <div><h5>Liên kết</h5><a href="#home">Trang chủ</a><a href="#records">Hồ sơ số</a><a href="#classes">Quản lý trẻ</a><a href="#teachers">Năng lực GV</a></div>
+    <div><h5>Phụ huynh</h5><a href="#">Sổ liên lạc</a><a href="#">Thực đơn</a><a href="#">Lịch hoạt động</a><a href="#">Học phí</a></div>
+    <div><h5>Kết nối</h5><a href="#">Facebook</a><a href="#">Zalo OA</a><a href="#">YouTube</a><a href="#">Hotline</a></div>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2026 Trường Mầm non Diễn Xuân – Xã Quảng Châu, tỉnh Nghệ An</div>
+    <div>Dữ liệu đồng bộ từ Google Sheet · Frontend: GitHub Pages · Backend: Google Apps Script</div>
+  </div>
+</footer>
+
+<script>
+  // ====================================================================
+  // 🔗 URL API (Google Apps Script /exec) - ĐÃ DÁN SẴN URL CỦA BẠN
+  // ====================================================================
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxr0jNfPPywDDgtQgBJCdE24cIx3_ZMWcy1FYNXsX5t9fHKhTE3dChC5BqXwXfVotDV/exec';
+
+  // ============ STATE ============
+  let HSS = [], TEACHERS = [], CLASSES = [], STATS = {};
+  let currentClass = null;
+  const CAT_ICONS = ['🏫','👩‍🏫','🏢','🤝','👶','🎗️','📁','📁'];
+  const CAT_TINTS = ['#d6ecdb','#fff0d1','#dae7ff','#f0dcff','#ffdfd1','#ffe5b4','#e8f5ee','#e8f5ee'];
+  const AGE_META = {
+    nha_tre: {icon:'🍼', label:'Nhà trẻ'},
+    mg3:     {icon:'🎈', label:'3 tuổi'},
+    mg4:     {icon:'🎨', label:'4 tuổi'},
+    mg5:     {icon:'🎓', label:'5 tuổi'}
+  };
+
+  function toggleMenu(){
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.getElementById('backdrop').classList.toggle('open');
+  }
+
+  function initials(name){
+    const p = String(name||'').trim().split(/\s+/);
+    const first = (p[0] && p[0][0]) || '';
+    const last = (p[p.length-1] && p[p.length-1][0]) || '';
+    return (first + last).toUpperCase();
+  }
+  function escapeHtml(s){
+    return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  }
+  function countLeaves(nodes){
+    let t=0,f=0;
+    nodes.forEach(n => {
+      if(n.leaf){ t++; if(n.has) f++; }
+      else if(n.children){ const x = countLeaves(n.children); t+=x.t; f+=x.f; }
+    });
+    return {t,f};
+  }
+
+  // ============ RENDER STATS ============
+  function renderStats(){
+    document.getElementById('stRecords').textContent = STATS.totalRecords || 0;
+    document.getElementById('stTeachers').textContent = STATS.totalTeachers || 0;
+    document.getElementById('stClasses').textContent = STATS.totalClasses || 0;
+    document.getElementById('stChildren').textContent = STATS.totalChildren || 0;
+    document.getElementById('recCount').textContent = STATS.totalRecords || 0;
+    if(STATS.config){
+      document.getElementById('cfgAddress').textContent = STATS.config.address || '';
+      document.getElementById('cfgPhone').textContent = STATS.config.phone || '';
+      document.getElementById('cfgEmail').textContent = STATS.config.email || '';
+      document.getElementById('schoolYear').textContent = STATS.config.schoolYear || '';
+    }
+  }
+
+  // ============ RECORDS (Hồ sơ số) ============
+  function renderCategories(){
+    document.getElementById('catGrid').innerHTML = HSS.map((cat, i) => {
+      const c = countLeaves(cat.children || []);
+      const groups = (cat.children || []).length;
+      return `<div class="cat-card" style="--tint:${CAT_TINTS[i]||'#e8f5ee'}" onclick="openCat(${i})">
+        <span class="cat-num">NHÓM 0${i+1}</span>
+        <span class="cat-icon">${CAT_ICONS[i] || '📁'}</span>
+        <h3>${escapeHtml(cat.name)}</h3>
+        <div class="cat-meta">
+          <div class="cat-count"><span><b>${c.t}</b>hồ sơ</span><span><b>${groups}</b>nhóm</span></div>
+          <div class="cat-arrow">→</div>
+        </div></div>`;
+    }).join('');
+  }
+
+  function renderLeaves(items){
+    return items.map(it => `<div class="leaf">
+      <span class="status-dot ${it.has ? '' : 'empty'}"></span>
+      <span class="leaf-code">${it.code}</span>
+      <span class="leaf-name">${escapeHtml(it.name)}</span>
+      ${it.has ? `<a class="open-btn" href="${escapeHtml(it.link)}" target="_blank" rel="noopener">Mở</a>` : `<span class="open-btn disabled">Chưa có</span>`}
+    </div>`).join('');
+  }
+
+  function renderSubgroup(g){
+    const directLeaves = (g.children || []).filter(x => x.leaf);
+    const nestedGroups = (g.children || []).filter(x => !x.leaf);
+    const leafCount = countLeaves(g.children || []).t;
+    let nestedHtml = '';
+    nestedGroups.forEach(ng => {
+      const ngLeaves = (ng.children || []).filter(x => x.leaf);
+      nestedHtml += `<div class="sub-nest">
+        <div class="nest-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="nest-title"><span>📁</span><span>${escapeHtml(ng.code)}. ${escapeHtml(ng.name)}</span></div>
+          <span class="sub-badge">${ngLeaves.length}</span>
+        </div>
+        <div class="nest-list">${renderLeaves(ngLeaves)}</div>
+      </div>`;
+    });
+    return `<div class="sub-group">
+      <div class="sub-head" onclick="this.parentElement.classList.toggle('open')">
+        <div class="sub-title"><span>📂</span><span>${escapeHtml(g.code)}. ${escapeHtml(g.name)}</span></div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="sub-badge">${leafCount} hồ sơ</span>
+          <span class="sub-toggle">▸</span>
+        </div>
+      </div>
+      <div class="sub-list">${renderLeaves(directLeaves)}${nestedHtml}</div>
+    </div>`;
+  }
+
+  function openCat(i){
+    const cat = HSS[i];
+    if(!cat) return;
+    document.getElementById('detailIcon').textContent = CAT_ICONS[i] || '📁';
+    document.getElementById('detailName').textContent = cat.name;
+    document.getElementById('detailBody').innerHTML = (cat.children || []).map(renderSubgroup).join('');
+    const first = document.querySelector('#detailBody .sub-group');
+    if(first) first.classList.add('open');
+    const detail = document.getElementById('catDetail');
+    detail.classList.add('active');
+    setTimeout(() => detail.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+  }
+  function closeDetail(){
+    document.getElementById('catDetail').classList.remove('active');
+    document.getElementById('records').scrollIntoView({behavior:'smooth'});
+  }
+
+  // Search records
+  document.getElementById('recSearch').addEventListener('input', e => {
+    const q = e.target.value.trim().toLowerCase();
+    if(!q){
+      document.querySelectorAll('.cat-card').forEach(c => c.style.display='');
+      closeDetail(); return;
+    }
+    const matches = [];
+    HSS.forEach((cat, ci) => {
+      (function walk(nodes){
+        nodes.forEach(n => {
+          if(n.leaf){
+            if(n.code.toLowerCase().includes(q) || n.name.toLowerCase().includes(q))
+              matches.push({...n, catIdx: ci, catName: cat.name});
+          } else if(n.children){ walk(n.children); }
+        });
+      })(cat.children || []);
+    });
+    document.querySelectorAll('.cat-card').forEach(c => c.style.display='none');
+    document.getElementById('detailIcon').textContent = '🔍';
+    document.getElementById('detailName').textContent = `Kết quả tìm: "${q}" (${matches.length} hồ sơ)`;
+    document.getElementById('detailBody').innerHTML = matches.length
+      ? `<div class="sub-group open"><div class="sub-list">${renderLeaves(matches)}</div></div>`
+      : '<p style="padding:30px;text-align:center;color:#6b7a72">Không tìm thấy hồ sơ phù hợp.</p>';
+    document.getElementById('catDetail').classList.add('active');
+  });
+
+  // ============ CLASSES (Quản lý trẻ) ============
+  function renderAgeTabs(){
+    const counts = {all: CLASSES.length, nha_tre:0, mg3:0, mg4:0, mg5:0};
+    CLASSES.forEach(c => { if(counts[c.ageKey] !== undefined) counts[c.ageKey]++; });
+    const tabs = document.getElementById('ageTabs');
+    tabs.innerHTML = `<button class="age-tab active" data-age="all">Tất cả (${counts.all})</button>
+      ${counts.nha_tre ? `<button class="age-tab" data-age="nha_tre">🍼 Nhà trẻ (${counts.nha_tre})</button>` : ''}
+      ${counts.mg3 ? `<button class="age-tab" data-age="mg3">🎈 3 tuổi (${counts.mg3})</button>` : ''}
+      ${counts.mg4 ? `<button class="age-tab" data-age="mg4">🎨 4 tuổi (${counts.mg4})</button>` : ''}
+      ${counts.mg5 ? `<button class="age-tab" data-age="mg5">🎓 5 tuổi (${counts.mg5})</button>` : ''}`;
+    tabs.querySelectorAll('.age-tab').forEach(t => {
+      t.addEventListener('click', () => {
+        tabs.querySelectorAll('.age-tab').forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        renderClasses(t.dataset.age);
+      });
+    });
+  }
+  function renderClasses(filter){
+    filter = filter || 'all';
+    const list = filter === 'all' ? CLASSES : CLASSES.filter(c => c.ageKey === filter);
+    document.getElementById('classGrid').innerHTML = list.map(c => {
+      const meta = AGE_META[c.ageKey] || {icon:'🏫', label:c.ageLabel||''};
+      return `<div class="class-card" data-age="${c.ageKey}" onclick="openClass('${escapeHtml(c.name).replace(/'/g,'&#39;')}')">
+        <span class="class-age-chip">${meta.icon} ${meta.label}</span>
+        <div class="class-name">${escapeHtml(c.name)}</div>
+        <span class="class-age-text">${escapeHtml(c.ageGroup||'')}</span>
+        <div class="class-stats">
+          <div class="class-stat"><b>${c.students.length}</b><small>Tổng</small></div>
+          <div class="class-stat male"><b>${c.male}</b><small>Nam</small></div>
+          <div class="class-stat female"><b>${c.female}</b><small>Nữ</small></div>
+        </div>
+        <div class="class-cta">Xem danh sách →</div>
+      </div>`;
+    }).join('');
+  }
+  function openClass(name){
+    name = name.replace(/&#39;/g, "'");
+    const cls = CLASSES.find(c => c.name === name);
+    if(!cls) return;
+    currentClass = cls;
+    document.getElementById('spTitle').textContent = cls.name;
+    document.getElementById('spMeta').textContent = `${cls.ageGroup} · ${cls.students.length} trẻ (${cls.male} nam / ${cls.female} nữ)`;
+    document.getElementById('stSearch').value = '';
+    renderStudents(cls.students);
+    const panel = document.getElementById('studentsPanel');
+    panel.classList.add('active');
+    setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+  }
+  function closeStudents(){
+    document.getElementById('studentsPanel').classList.remove('active');
+    document.getElementById('classes').scrollIntoView({behavior:'smooth'});
+  }
+  function renderStudents(list){
+    const wrap = document.getElementById('stTableWrap');
+    if(!list.length){
+      wrap.innerHTML = '<div class="st-empty">Không tìm thấy trẻ phù hợp.</div>';
+      return;
+    }
+    wrap.innerHTML = `<table class="st-table">
+      <thead><tr><th>STT</th><th>Họ và tên</th><th>Ngày sinh</th><th>Giới tính</th><th>Nơi sinh</th><th>SĐT phụ huynh</th></tr></thead>
+      <tbody>${list.map((s, i) => {
+        const isFemale = /nữ|nu/i.test(s.gender);
+        const init = initials(s.name);
+        const rowId = 'st' + i;
+        return `<tr class="main" id="${rowId}" onclick="toggleStudent('${rowId}', ${i})">
+          <td class="st-idx" data-lbl="STT">${i+1}</td>
+          <td class="st-name-cell" data-lbl="Trẻ">
+            <span class="st-avatar ${isFemale?'female':''}">${init}</span>
+            <span class="st-name">${escapeHtml(s.name)}</span>
+          </td>
+          <td data-lbl="Ngày sinh">${escapeHtml(s.dob)}</td>
+          <td data-lbl="Giới tính"><span class="st-gender ${isFemale?'f':'m'}">${escapeHtml(s.gender)}</span></td>
+          <td data-lbl="Nơi sinh">${escapeHtml(s.birthplace || '–')}</td>
+          <td data-lbl="SĐT">${escapeHtml(s.phone || '–')}</td>
+        </tr>
+        <tr class="st-detail-row" id="${rowId}_d" style="display:none">
+          <td colspan="6"><div class="st-detail-inner">
+            <div class="st-field"><strong>Mã học sinh</strong><span>${escapeHtml(s.studentCode || '–')}</span></div>
+            <div class="st-field"><strong>Dân tộc / Tôn giáo</strong><span>${escapeHtml(s.ethnic || '–')} / ${escapeHtml(s.religion || '–')}</span></div>
+            <div class="st-field"><strong>Địa chỉ thường trú</strong><span>${escapeHtml([s.hamlet, s.ward, s.province].filter(Boolean).join(', ') || '–')}</span></div>
+            <div class="st-field"><strong>Họ tên cha</strong><span>${escapeHtml(s.father || '–')} ${s.fatherYear ? '('+escapeHtml(s.fatherYear)+')' : ''}</span></div>
+            <div class="st-field"><strong>Họ tên mẹ</strong><span>${escapeHtml(s.mother || '–')} ${s.motherYear ? '('+escapeHtml(s.motherYear)+')' : ''}</span></div>
+          </div></td>
+        </tr>`;
+      }).join('')}</tbody></table>`;
+  }
+  function toggleStudent(rowId, i){
+    const row = document.getElementById(rowId);
+    const det = document.getElementById(rowId + '_d');
+    if(det.style.display === 'none'){ det.style.display = ''; row.classList.add('open'); }
+    else { det.style.display = 'none'; row.classList.remove('open'); }
+  }
+  document.getElementById('stSearch').addEventListener('input', e => {
+    if(!currentClass) return;
+    const q = e.target.value.trim().toLowerCase();
+    if(!q){ renderStudents(currentClass.students); return; }
+    renderStudents(currentClass.students.filter(s =>
+      s.name.toLowerCase().includes(q) ||
+      (s.father || '').toLowerCase().includes(q) ||
+      (s.mother || '').toLowerCase().includes(q)
+    ));
+  });
+
+  // ============ TEACHERS ============
+  function teacherType(t){
+    const r = (t.role || '').toLowerCase();
+    if(r.includes('hiệu trưởng') || r.includes('phó hiệu')) return 'bgh';
+    if(r.includes('giáo viên')) return 'gv';
+    return 'nv';
+  }
+  function renderRoleFilter(){
+    const counts = {all: TEACHERS.length, bgh:0, gv:0, nv:0};
+    TEACHERS.forEach(t => counts[teacherType(t)]++);
+    const filter = document.getElementById('roleFilter');
+    filter.innerHTML = `<button class="role-chip active" data-role="all">Tất cả (${counts.all})</button>
+      <button class="role-chip" data-role="bgh">Ban giám hiệu (${counts.bgh})</button>
+      <button class="role-chip" data-role="gv">Giáo viên (${counts.gv})</button>
+      <button class="role-chip" data-role="nv">Nhân viên (${counts.nv})</button>`;
+    filter.querySelectorAll('.role-chip').forEach(c => {
+      c.addEventListener('click', () => {
+        filter.querySelectorAll('.role-chip').forEach(x => x.classList.remove('active'));
+        c.classList.add('active');
+        renderTeachers(c.dataset.role);
+      });
+    });
+  }
+  function renderTeachers(role){
+    role = role || 'all';
+    const list = role === 'all' ? TEACHERS : TEACHERS.filter(t => teacherType(t) === role);
+    document.getElementById('teacherGrid').innerHTML = list.map(t => {
+      const extra = [t.degree, t.dob ? 'Sinh '+t.dob : ''].filter(Boolean).join(' · ');
+      const btn = t.link
+        ? `<a class="teacher-profile" href="${escapeHtml(t.link)}" target="_blank" rel="noopener">📂 Hồ sơ cá nhân</a>`
+        : `<span class="teacher-profile disabled">📂 Chưa có</span>`;
+      return `<div class="teacher-card">
+        <div class="teacher-avatar">${initials(t.name)}</div>
+        <h4>${escapeHtml(t.name)}</h4>
+        <span class="teacher-role">${escapeHtml(t.role)}</span>
+        ${extra ? `<span class="teacher-tag">${escapeHtml(extra)}</span>` : ''}
+        <div>${btn}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // ============ FAQ ============
+  const faqs = [
+    {q:'Làm sao tìm nhanh một hồ sơ?', a:'Dùng ô tìm kiếm ở đầu mục "Hồ sơ số". Gõ từ khóa theo tên hoặc mã (VD: "thi đua", "1.2.1") — danh sách sẽ tự lọc.'},
+    {q:'Vì sao có hồ sơ không thấy nút "Mở"?', a:'Hồ sơ đó chưa được cập nhật link trong Google Sheet. Chấm sẽ chuyển sang màu xám. Chỉ cần dán link Drive vào ô Link trong Sheet là trang web tự cập nhật.'},
+    {q:'Dữ liệu cập nhật thế nào?', a:'Toàn bộ dữ liệu được lưu trên Google Sheet. Khi cán bộ cập nhật trong sheet, chỉ cần reload trang (F5 trên máy tính, kéo xuống làm mới trên điện thoại) là thấy ngay thông tin mới.'},
+    {q:'Xem trên điện thoại có được không?', a:'Hoàn toàn được. Giao diện tự điều chỉnh cho màn hình nhỏ, menu thu gọn thành nút ☰ ở góc phải.'},
+    {q:'Mở hồ sơ trên Drive có cần đăng nhập?', a:'Tùy quyền chia sẻ nhà trường đặt. Nếu folder để "Bất kỳ ai có link xem" thì không cần đăng nhập; nếu để riêng tư thì cần tài khoản được cấp quyền.'},
+    {q:'Ai có thể chỉnh sửa dữ liệu?', a:'Chỉ người được cấp quyền chỉnh sửa Google Sheet nguồn. Trang web chỉ hiển thị (chỉ đọc) nên an toàn cho phụ huynh xem.'}
+  ];
+  document.getElementById('faqList').innerHTML = faqs.map(f => `<div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <span class="faq-q-text">${f.q}</span>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-a"><div class="faq-a-inner">${f.a}</div></div>
+  </div>`).join('');
+
+  // ============ HERO CAROUSEL ============
+  (function(){
+    const slides = document.querySelectorAll('#carousel .slide');
+    let current = 0; const total = slides.length;
+    function render(){
+      slides.forEach((s, i) => {
+        s.classList.remove('active','next','prev');
+        if(i === current) s.classList.add('active');
+        else if(i === (current+1)%total) s.classList.add('next');
+        else if(i === (current-1+total)%total) s.classList.add('prev');
+      });
+    }
+    setInterval(() => { current = (current+1)%total; render(); }, 3500);
+    render();
+  })();
+
+  // ============ FETCH DATA FROM GAS API ============
+  function boot(data){
+    HSS = data.hss || [];
+    TEACHERS = data.teachers || [];
+    CLASSES = data.classes || [];
+    STATS = data.stats || {};
+    renderStats();
+    renderCategories();
+    renderAgeTabs();
+    renderClasses('all');
+    renderRoleFilter();
+    renderTeachers('all');
+    document.getElementById('loadScreen').classList.add('done');
+    setTimeout(() => document.getElementById('loadScreen').remove(), 500);
+  }
+  function loadError(msg){
+    document.getElementById('loadScreen').innerHTML = `
+      <div style="text-align:center;padding:40px;max-width:560px">
+        <div style="font-size:3rem;margin-bottom:20px">⚠️</div>
+        <h3 style="font-family:Fraunces,serif;margin-bottom:12px">Không tải được dữ liệu</h3>
+        <p style="opacity:.9;margin-bottom:8px;font-size:.95rem">${escapeHtml(msg)}</p>
+        <p style="opacity:.7;font-size:.82rem;margin-bottom:20px">Kiểm tra lại URL API và quyền truy cập "Anyone" của Web App.</p>
+        <button class="btn btn-primary" onclick="location.reload()">Thử lại</button>
+      </div>`;
+  }
+
+  // Dùng JSONP để vượt CORS (GAS không gửi header CORS)
+  function loadData(){
+    if(!API_URL || API_URL.indexOf('AKfyc') === -1){
+      loadError('Chưa cấu hình API_URL trong file Index.html.'); return;
+    }
+    const cbName = 'jsonpCb_' + Date.now();
+    const script = document.createElement('script');
+    const timer = setTimeout(() => {
+      delete window[cbName];
+      script.remove();
+      loadError('Quá hạn chờ phản hồi từ máy chủ. Vui lòng kiểm tra kết nối mạng và thử lại.');
+    }, 30000);
+    window[cbName] = function(resp){
+      clearTimeout(timer);
+      delete window[cbName];
+      script.remove();
+      if(resp && resp.ok){ boot(resp.data); }
+      else { loadError(resp && resp.error ? resp.error : 'Phản hồi không hợp lệ.'); }
+    };
+    script.src = API_URL + (API_URL.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + cbName + '&action=all';
+    script.onerror = function(){
+      clearTimeout(timer);
+      delete window[cbName];
+      script.remove();
+      loadError('Không gọi được API. Có thể URL sai hoặc Web App chưa được triển khai với quyền "Anyone".');
+    };
+    document.body.appendChild(script);
+  }
+  loadData();
+</script>
+
+</body>
+</html>
